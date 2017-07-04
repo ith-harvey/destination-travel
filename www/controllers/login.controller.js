@@ -1,6 +1,6 @@
 angular.module('starter.controllers',['ngCordovaOauth'])
 
-.controller('AppCtrl', function($scope, $ionicModal, $timeout, $cordovaOauth) {
+.controller('AppCtrl', function($scope, $ionicModal, $timeout, $cordovaOauth, loginService) {
   // With the new view caching in Ionic, Controllers are only called
   // when they are recreated or on app start, instead of every page change.
   // To listen for when this page is active (for example, to refresh data),
@@ -30,14 +30,12 @@ angular.module('starter.controllers',['ngCordovaOauth'])
 
   // Perform the login action when the user submits the login form
   $scope.doLogin = function() {
-
-    console.log('Ballz1', $scope.loginData);
-
-    $cordovaOauth.facebook('{{{{{{ INSERT  APP ID}}}}}}',['email']).then(function(result) {
-      console.log("Response Object -> " + JSON.stringify(result));
-      }, function(error) {
-      console.log("Error -> " + error);
+    loginService.facebookLogin().success(response => {
+      console.log('response!', response)
+    }).error( data => {
+      console.log('data', data);
     })
+
 
     // Simulate a login delay. Remove this and replace with your login
     // code if using a login system
