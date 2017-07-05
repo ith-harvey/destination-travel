@@ -6,8 +6,9 @@ angular.module('starter').service('loginService', loginService)
     const vm = this
 
     vm.facebookLogin = function () {
-      const rootURL = 'http://localhost:3000'
-      const url = `${rootURL}/users/auth/facebook`
-      return $http.get(url)
+      // return $auth.authenticate('facebook')
+      // const rootURL = 'http://localhost:3000'
+      // const url = `${rootURL}/users/auth/facebook`
+      // return $http.get(url)
     }
   }

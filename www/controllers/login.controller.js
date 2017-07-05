@@ -29,11 +29,12 @@ angular.module('starter.controllers',['ngCordovaOauth'])
   };
 
   // Perform the login action when the user submits the login form
-  $scope.doLogin = function() {
-    loginService.facebookLogin().success(response => {
-      console.log('response!', response)
-    }).error( data => {
-      console.log('data', data);
+  $scope.facebookLogin = function() {
+
+    $cordovaOauth.facebook('1981517632083291',['email', 'user_relationships']).then(function(result) {
+      console.log("Response Object -> " + JSON.stringify(result));
+      }, function(error) {
+      console.log("Error -> " + error);
     })
 
 
