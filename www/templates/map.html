@@ -3,7 +3,9 @@
     <div class="bar bar-header item-input-inset">
       <label class="item-input-wrapper">
         <i class="icon ion-ios7-search placeholder-icon"></i>
-        <input type="search" ng-model="mapSearch" placeholder="Search">
+        <!-- <input id="searchTextField" type="search" placeholder="Search"> -->
+        <input type="text" id="Autocomplete" class="form-control" ng-autocomplete ng-model="result1" />
+        <div>result: {{result1}}</div>
       </label>
       <button ion-button button-outline>Cancel</button>
     </div>
@@ -13,10 +15,5 @@
 
 
 
-// for list below search bar
 
-<!-- <ion-list class="list-alternate" ng-style="{height: containerHeight}">
-  <ion-item ng-repeat="subject in subjects |  filter:{displayValue: search.text}">
-    {{subject.displayValue}}
-  </ion-item>
-</ion-list> -->
+// for list below search bar

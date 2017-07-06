@@ -1,4 +1,4 @@
-angular.module('starter.controllers',['ngCordovaOauth'])
+angular.module('starter.controllers',['ngCordovaOauth', 'ngAutocomplete'])
 
 .controller('AppCtrl', function($scope, $ionicModal, $timeout, $cordovaOauth) {
   // With the new view caching in Ionic, Controllers are only called
