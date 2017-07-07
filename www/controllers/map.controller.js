@@ -3,15 +3,26 @@
 angular.module('starter').controller('MapCtrl', function($scope, $rootScope, $state, $cordovaGeolocation,mapService) {
   let options = {timeout: 10000, enableHighAccuracy: true};
   let geocoder = new google.maps.Geocoder();
+  // $scope.details = {}
+  // $rootScope.details = {}
+
+
 
   // $scope.result = {}
-  // $scope.$watch('result.location', (newValue, oldValue) => {
+  // $scope.$watch('details.name', (newValue, oldValue) => {
   //   console.log('!!', newValue, oldValue)
   // })
 
   $scope.updateMap = function (latLng) {
     $scope.map.setCenter(latLng)
     console.log('logging that good good',mapService.getSearchItemDetails());
+
+    $scope.$apply(function () {
+      $scope.name = mapService.getSearchItemDetails().name
+    })
+
+
+    // $scope.details.name = mapService.getSearchItemDetails().name
   }
 
 
@@ -34,7 +45,8 @@ angular.module('starter').controller('MapCtrl', function($scope, $rootScope, $st
     let mapOptions = {
         center: latLng,
         zoom: 14,
-        mapTypeId: google.maps.MapTypeId.ROADMAP
+        mapTypeId: google.maps.MapTypeId.ROADMAP,
+        mapTypeControl: false
       };
 
     $scope.map = new google.maps.Map(document.getElementById("map"), mapOptions);

@@ -9,7 +9,12 @@
   height: 8%;
 }
 
+#destinationFooterBar {
+  width: 100%;
+  height: 12%;
+}
+
 #map {
   width: 100%;
-  height: 92%;
+  height: 80%;
 }
