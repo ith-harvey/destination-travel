@@ -1,6 +1,6 @@
 
 
-angular.module('starter').controller('MapCtrl', function($scope, $rootScope, $state, $cordovaGeolocation) {
+angular.module('starter').controller('MapCtrl', function($scope, $rootScope, $state, $cordovaGeolocation,mapService) {
   let options = {timeout: 10000, enableHighAccuracy: true};
   let geocoder = new google.maps.Geocoder();
 
@@ -11,11 +11,13 @@ angular.module('starter').controller('MapCtrl', function($scope, $rootScope, $st
 
   $scope.updateMap = function (latLng) {
     $scope.map.setCenter(latLng)
+    console.log('logging that good good',mapService.getSearchItemDetails());
   }
 
 
   $scope.search = function (address) {
 
+    console.log('this is what is passed in', address);
     geocoder.geocode( { 'address': address}, function(results, status) {
       if (status === 'OK') {
         $scope.updateMap(results[0].geometry.location)

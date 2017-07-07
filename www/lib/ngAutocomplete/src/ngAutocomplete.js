@@ -28,7 +28,7 @@
 **/
 
 angular.module( "ngAutocomplete", [])
-  .directive('ngAutocomplete', function() {
+  .directive('ngAutocomplete', function(mapService) {
     return {
       require: 'ngModel',
       scope: {
@@ -90,7 +90,7 @@ angular.module( "ngAutocomplete", [])
 
               scope.$apply(function() {
                 scope.details = result;
-                console.log('scope.details',scope.details);
+                mapService.saveSearchItemDetails(scope.details)
 
                 controller.$setViewValue(element.val());
               });
@@ -105,6 +105,7 @@ angular.module( "ngAutocomplete", [])
 
         //function to get retrieve the autocompletes first result using the AutocompleteService
         var getPlace = function(result) {
+          console.log('result',result);
           var autocompleteService = new google.maps.places.AutocompleteService();
           if (result.name.length > 0){
             autocompleteService.getPlacePredictions(
@@ -124,6 +125,9 @@ angular.module( "ngAutocomplete", [])
                   placesService.getDetails(
                     {'reference': list[0].reference},
                     function detailsresult(detailsResult, placesServiceStatus) {
+
+                      console.log('detailsRes',detailsResult);
+                      console.log('placesServiceSta',placesServiceStatus);
 
                       if (placesServiceStatus == google.maps.GeocoderStatus.OK) {
                         scope.$apply(function() {
