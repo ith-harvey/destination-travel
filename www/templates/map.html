@@ -1,14 +1,12 @@
 <ion-view>
-  <ion-content>
-    <div class="bar bar-header item-input-inset">
-      <label class="item-input-wrapper">
-        <i class="icon ion-ios7-search placeholder-icon"></i>
-        <!-- <input id="searchTextField" type="search" placeholder="Search"> -->
-        <input type="text" id="Autocomplete" class="form-control" ng-autocomplete ng-model="result1" />
-        <div>result: {{result1}}</div>
-      </label>
-      <button ion-button button-outline>Cancel</button>
-    </div>
+    <ion-content>
+      <ion-header-bar id="searchBar"class="item-input-inset">
+        <label class="item-input-wrapper">
+          <i class="icon ion-ios7-search placeholder-icon"></i>
+          <input type="text" id="Autocomplete" class="form-control" ng-autocomplete ng-model="result.location" ng-blur="search(result.location)" />
+        </label>
+        <button ion-button button-outline>Cancel</button>
+      </ion-header-bar>
     <div id="map" data-tap-disabled="true"></div>
   </ion-content>
 </ion-view>

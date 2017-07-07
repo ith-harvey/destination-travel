@@ -1,7 +1,29 @@
 
 
-angular.module('starter').controller('MapCtrl', function($scope, $state, $cordovaGeolocation) {
+angular.module('starter').controller('MapCtrl', function($scope, $rootScope, $state, $cordovaGeolocation) {
   let options = {timeout: 10000, enableHighAccuracy: true};
+  let geocoder = new google.maps.Geocoder();
+
+  // $scope.result = {}
+  // $scope.$watch('result.location', (newValue, oldValue) => {
+  //   console.log('!!', newValue, oldValue)
+  // })
+
+  $scope.updateMap = function (latLng) {
+    $scope.map.setCenter(latLng)
+  }
+
+
+  $scope.search = function (address) {
+
+    geocoder.geocode( { 'address': address}, function(results, status) {
+      if (status === 'OK') {
+        $scope.updateMap(results[0].geometry.location)
+      } else {
+        alert('Geocode was not successful for the following reason: ' + status);
+      }
+    });
+  }
 
   $cordovaGeolocation.getCurrentPosition(options).then(function(position) {
 
@@ -9,7 +31,7 @@ angular.module('starter').controller('MapCtrl', function($scope, $state, $cordov
 
     let mapOptions = {
         center: latLng,
-        zoom: 15,
+        zoom: 14,
         mapTypeId: google.maps.MapTypeId.ROADMAP
       };
 
@@ -25,10 +47,5 @@ angular.module('starter').controller('MapCtrl', function($scope, $state, $cordov
       console.log("Could not get location");
     }
   )
-
-  
-  console.log('result1!',$scope.result1)
-
-
 
 })
