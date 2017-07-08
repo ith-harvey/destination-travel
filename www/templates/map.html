@@ -1,19 +1,49 @@
 <ion-view>
   <ion-content>
-    <ion-header-bar id="searchBar" class="item-input-inset">
-      <label class="item-input-wrapper">
-          <i class="icon ion-ios7-search placeholder-icon"></i>
-          <input type="text" id="Autocomplete" class="form-control" ng-autocomplete ng-model="result.location" placeholder="enter in a location" ng-blur="search(result.location)" />
-        </label>
-      <button ion-button button-outline>Cancel</button>
-    </ion-header-bar>
 
-    <div id="map" data-tap-disabled="true"></div>
+    <div class="bar bar-header item-input-inset">
+        <label class="item-input-wrapper">
+            <i class="icon ion-ios-search placeholder-icon"></i>
+            <input type="text" ng-autocomplete ng-disabletap ng-model="result.location" ng-change="search(result.location)" placeholder="Search">
+          </label>
+          <div class="buttons">
+            <button class="button button-outline button-positive">Cancel</button>
+          </div>
+    </div>
 
-    <ion-footer-bar id="destinationFooterBar" align-title="left" class="bar-assertive">
-      <h1 class="title">{{name}}</h1>
-      <div class="buttons" ng-click="doSomething()">
-        <button class="button">Right Button</button>
+    <!-- <div id="searchBarWindow" class="bar bar-header item-input-inset">
+          <label class="item-input-wrapper">
+              <i class="icon ion-ios7-search placeholder-icon"></i>
+              <input type="text" id="Autocomplete" class="form-control" ng-autocomplete ng-model="result.location" placeholder="enter in a location" ng-blur="search(result.location)" />
+          </label>
+          <div class="buttons">
+            <button class="noPadding button button-outline button-positive">Cancel</button>
+          </div>
+    </div> -->
+
+
+    <div id="map" class="{{mapClass}}" data-tap-disabled="true"></div>
+
+    <div class="card" id="destinationDisplay" ng-if="destinationDisplay" ng-click="displayFire()">
+      <div scroll="true" class="item item-text-wrap">
+        <h1 class="title">{{details.name}}</h1>
+        <h2>{{details.formatted_address}}</h2>
+        <p>rating: {{details.rating}}</p>
+        <p>price level: {{details.price_level}}</p>
+        <p>{{details.opening_hours.weekday_text[0]}}</p>
+        <p>Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable source. Lorem Ipsum comes from sections 1.10.32 and 1.10.33 of "de Finibus Bonorum et Malorum" (The Extremes of Good and Evil) by Cicero, written in 45 BC. This book is a treatise on the theory of ethics, very popular during the Renaissance. The first line of Lorem Ipsum, "Lorem ipsum dolor sit amet..", comes from a line in section 1.10.32.</p>
+        <p>{{details.international_phone_number}}</p>
+        <a href="{{details.webiste}}">{{details.webiste}}</a>
+
+      </div>
+    </div>
+
+
+
+    <ion-footer-bar ng-show="!destinationDisplay&&footerActive" ng-click="displayFire()" id="destinationFooterBar" align-title="left" class="bar-assertive">
+      <h1 class="title">{{details.name}}</h1>
+      <div class="buttons" ng-click="saveDestination()">
+        <button class="button">Save this location</button>
       </div>
     </ion-footer-bar>
   </ion-content>

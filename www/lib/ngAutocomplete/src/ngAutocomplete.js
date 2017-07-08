@@ -90,6 +90,7 @@ angular.module( "ngAutocomplete", [])
 
               scope.$apply(function() {
                 scope.details = result;
+                console.log('< -- here is what is run in directive',scope.details);
                 mapService.saveSearchItemDetails(scope.details)
 
                 controller.$setViewValue(element.val());

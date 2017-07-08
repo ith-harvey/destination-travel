@@ -1,12 +1,39 @@
 /* Empty. Add your own CSS if you like */
+html {
+   height: 100%;
+}
+
+
+.noPadding {
+  padding-top: 0px;
+  padding-bottom: 0px;
+}
 
 .scroll {
   height: 100%;
 }
 
-#searchBar {
+.pac-container {
+  z-index: 3000 !important;
+}
+
+#searchBarWindow {
   width: 100%;
   height: 8%;
+}
+
+#searchBar {
+  padding-bottom: 2%;
+}
+
+.mapFull {
+  width: 100%;
+  height: 92%;
+}
+
+.mapWithDestination {
+  width: 100%;
+  height: 80%;
 }
 
 #destinationFooterBar {
@@ -14,7 +41,8 @@
   height: 12%;
 }
 
-#map {
-  width: 100%;
+#destinationDisplay {
   height: 80%;
+  top: 10%;
+  position: fixed;
 }
