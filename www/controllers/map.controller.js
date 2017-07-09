@@ -47,7 +47,7 @@ angular.module('starter').controller('MapCtrl', function($scope, $rootScope, $st
 
 // retreives lat lng using googles geocode
   $scope.search = function (address) {
-    console.log('this is what is passed in', address);
+    console.log('search is being run');
     geocoder.geocode( { 'address': address}, function(results, status) {
       if (status === 'OK') {
         $scope.updateMap(results[0].geometry.location)

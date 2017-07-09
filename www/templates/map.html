@@ -4,22 +4,12 @@
     <div class="bar bar-header item-input-inset">
         <label class="item-input-wrapper">
             <i class="icon ion-ios-search placeholder-icon"></i>
-            <input type="text" ng-autocomplete ng-disabletap ng-model="result.location" ng-change="search(result.location)" placeholder="Search">
+            <input type="text" ng-autocomplete ng-disabletap ng-onenter="search(result.location)" ng-model="result.location" placeholder="Search">
           </label>
           <div class="buttons">
             <button class="button button-outline button-positive">Cancel</button>
           </div>
     </div>
-
-    <!-- <div id="searchBarWindow" class="bar bar-header item-input-inset">
-          <label class="item-input-wrapper">
-              <i class="icon ion-ios7-search placeholder-icon"></i>
-              <input type="text" id="Autocomplete" class="form-control" ng-autocomplete ng-model="result.location" placeholder="enter in a location" ng-blur="search(result.location)" />
-          </label>
-          <div class="buttons">
-            <button class="noPadding button button-outline button-positive">Cancel</button>
-          </div>
-    </div> -->
 
 
     <div id="map" class="{{mapClass}}" data-tap-disabled="true"></div>
