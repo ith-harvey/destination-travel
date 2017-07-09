@@ -10,7 +10,7 @@ angular.module('starter').controller('MapCtrl', function($scope, $rootScope, $st
   $scope.mapClass = 'mapFull'
 
 
-  // Map gets initialized to world view
+  // Map gets initialized to to world view
   let mapOptions = {
       center: ({lat: 39.82, lng: -95.712}),
       zoom: 2,
@@ -45,9 +45,9 @@ angular.module('starter').controller('MapCtrl', function($scope, $rootScope, $st
     }
   )
 
+
+ // Watches for fireSearchWithItemDetails to fire, once it does it checks for the object. If there is an object it runs search
   $scope.$watch('mapWatchService.fireSearchWithItemDetails()', newVal => {
-    console.log('scope.$watch', newVal);
-    console.log(typeof newVal === 'object');
     if (typeof newVal === 'object') {
     $scope.searchMap(newVal.formatted_address)
     }
@@ -56,7 +56,6 @@ angular.module('starter').controller('MapCtrl', function($scope, $rootScope, $st
 
 // retreives lat lng using googles geocode
   $scope.searchMap = function (address) {
-    console.log('search is being run');
     geocoder.geocode( { 'address': address}, function(results, status) {
       if (status === 'OK') {
         $scope.updateMap(results[0].geometry.location)
@@ -105,6 +104,17 @@ angular.module('starter').controller('MapCtrl', function($scope, $rootScope, $st
   $scope.changeMapClass = function () {
     $scope.mapClass = 'mapWithDestination'
 
+  }
+
+  $scope.cancelSearch = function () {
+    $scope.result.location = ''
+
+  }
+
+  $scope.onTextClick = function () {
+    $scope.onTextClick = function ($event) {
+      $event.target.select();
+    };
   }
 
 

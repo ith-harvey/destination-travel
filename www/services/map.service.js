@@ -7,7 +7,6 @@ angular.module('starter').service('mapService', mapService)
     vm.details = ''
 
     vm.getSearchItemDetails = function () {
-      console.log('getSearchItemDetails is run');
       return vm.details
     }
 
@@ -24,7 +23,4 @@ angular.module('starter').service('mapService', mapService)
       searchMap(address)
 
     }
-
-
-
   }

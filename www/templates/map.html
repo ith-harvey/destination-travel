@@ -4,10 +4,10 @@
     <div class="bar bar-header item-input-inset">
         <label class="item-input-wrapper">
             <i class="icon ion-ios-search placeholder-icon"></i>
-            <input type="text" ng-autocomplete ng-disabletap ng-onenter="searchMap(result.location)" ng-model="result.location" placeholder="Search">
+            <input type="text" ng-autocomplete ng-disabletap select-all-in-input ng-onenter="searchMap(result.location)" ng-model="result.location" placeholder="Search">
           </label>
           <div class="buttons">
-            <button class="button button-outline button-positive">Cancel</button>
+            <button class="button button-outline button-positive" ng-click="result.location=''">Cancel</button>
           </div>
     </div>
 
