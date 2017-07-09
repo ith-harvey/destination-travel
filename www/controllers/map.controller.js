@@ -4,6 +4,7 @@ angular.module('starter').controller('MapCtrl', function($scope, $rootScope, $st
   let options = {timeout: 10000, enableHighAccuracy: true};
   let geocoder = new google.maps.Geocoder();
   $scope.details
+  $scope.mapWatchService = mapService
   $scope.destinationDisplay = false
   $scope.footerActive = false
   $scope.mapClass = 'mapFull'
@@ -44,9 +45,17 @@ angular.module('starter').controller('MapCtrl', function($scope, $rootScope, $st
     }
   )
 
+  $scope.$watch('mapWatchService.fireSearchWithItemDetails()', newVal => {
+    console.log('scope.$watch', newVal);
+    console.log(typeof newVal === 'object');
+    if (typeof newVal === 'object') {
+    $scope.searchMap(newVal.formatted_address)
+    }
+  })
+
 
 // retreives lat lng using googles geocode
-  $scope.search = function (address) {
+  $scope.searchMap = function (address) {
     console.log('search is being run');
     geocoder.geocode( { 'address': address}, function(results, status) {
       if (status === 'OK') {
@@ -61,7 +70,6 @@ angular.module('starter').controller('MapCtrl', function($scope, $rootScope, $st
   $scope.updateMap = function (latLng) {
     $scope.map.setCenter(latLng)
     $scope.map.setZoom(15)
-    console.log('logging that good good',mapService.getSearchItemDetails());
 
     $scope.$apply(function () {
       $scope.details = mapService.getSearchItemDetails()

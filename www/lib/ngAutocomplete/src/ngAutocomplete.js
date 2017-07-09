@@ -27,7 +27,7 @@
  *    }
 **/
 
-angular.module( "ngAutocomplete", [])
+angular.module( "ngAutocomplete", ['starter'])
   .directive('ngAutocomplete', function(mapService) {
     return {
       require: 'ngModel',
@@ -90,8 +90,9 @@ angular.module( "ngAutocomplete", [])
 
               scope.$apply(function() {
                 scope.details = result;
-                console.log('< -- here is what is run in directive',scope.details);
+                console.log('scope.details.formatted_address',scope.details.formatted_address);
                 mapService.saveSearchItemDetails(scope.details)
+
 
                 controller.$setViewValue(element.val());
               });

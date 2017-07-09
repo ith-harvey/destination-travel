@@ -7,6 +7,7 @@ angular.module( "ngDisabletap", []).directive('ngDisabletap', function($timeout)
         angular.element(container).attr('data-tap-disabled', 'true');
         // leave input field if gdoogle-address-entry is selected
         angular.element(container).on("click", function(){
+            console.log('onclick ran');
             document.getElementById('type-selector').blur();
         });
 
