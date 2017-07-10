@@ -129,8 +129,8 @@ angular.module('starter').controller('MapCtrl', function($scope, $rootScope, $st
     console.log(mapService.getSearchItemDetails().geometry.location.lat());
     console.log('inside of save location');
     let image = {
-        url: '../img/Gold-Star.png',
-        scaledSize: new google.maps.Size(20, 20),
+        url: 'img/Gold_star.png',
+        scaledSize: new google.maps.Size(60, 60),
         origin: new google.maps.Point(0, 0),
         anchor: new google.maps.Point(0, 32)
     }
