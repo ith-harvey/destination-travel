@@ -8,6 +8,8 @@ angular.module('starter').controller('MapCtrl', function($scope, $rootScope, $st
   $scope.destinationDisplay = false
   $scope.footerActive = false
   $scope.mapClass = 'mapFull'
+  const gMarkers = []
+  const savedGMarkers = []
 
 
   // Map gets initialized to to world view
@@ -85,6 +87,7 @@ angular.module('starter').controller('MapCtrl', function($scope, $rootScope, $st
         map: $scope.map,
         icon: image
       });
+      gMarkers.push(marker)
       $scope.footerActive = true
       $scope.changeMapClass()
     })
@@ -111,12 +114,36 @@ angular.module('starter').controller('MapCtrl', function($scope, $rootScope, $st
 
   }
 
-  $scope.onTextClick = function () {
+
     $scope.onTextClick = function ($event) {
       $event.target.select();
     };
-  }
 
+  $scope.saveLocation = function (destinationObj) {
+    let lat = mapService.getSearchItemDetails().geometry.location.lat()
+    let lng = mapService.getSearchItemDetails().geometry.location.lng()
+
+    // let latlng = ({mapService.getSearchItemDetails().geometry.location.lat(), mapService.getSearchItemDetails().geometry.location.lng()})
+    gMarkers.pop().setMap(null)
+    console.log('here is gMarkers', gMarkers);
+    console.log(mapService.getSearchItemDetails().geometry.location.lat());
+    console.log('inside of save location');
+    let image = {
+        url: '../img/Gold-Star.png',
+        scaledSize: new google.maps.Size(20, 20),
+        origin: new google.maps.Point(0, 0),
+        anchor: new google.maps.Point(0, 32)
+    }
+
+    let marker = new google.maps.Marker({
+      position: ({lat, lng}),
+      map: $scope.map,
+      icon: image
+    });
+
+    savedGMarkers.push(marker)
+
+  }
 
 
 

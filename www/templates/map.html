@@ -32,8 +32,13 @@
 
     <ion-footer-bar ng-show="!destinationDisplay&&footerActive" ng-click="displayFire()" id="destinationFooterBar" align-title="left" class="bar-assertive">
       <h1 class="title">{{details.name}}</h1>
-      <div class="buttons" ng-click="saveDestination()">
-        <button class="button">Save this location</button>
+      <div class="buttons" ng-click="saveLocation()">
+        <button class="button">
+          <div id="star-button-div">
+            <img class="gold-star" src="../img/Gold_star.png">
+          </div>
+          Save location
+        </button>
       </div>
     </ion-footer-bar>
   </ion-content>
