@@ -43,7 +43,13 @@ html {
 }
 
 .gold-star {
-  height: 3rem;
+  height: 1.5rem;
+  position: relative;
+}
+
+.star-text-p {
+  height: 1.5rem;
+  position: absolute;
 }
 
 #star-button-div {

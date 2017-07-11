@@ -1,6 +1,6 @@
 angular.module('starter.controllers',['ngCordovaOauth', 'ngAutocomplete', 'ngDisabletap', 'ngOnenter', 'selectAllInInput'])
 
-.controller('AppCtrl', function($scope, $ionicModal, $timeout, $cordovaOauth) {
+.controller('AppCtrl', function($scope, $ionicModal, $timeout, $cordovaOauth,loginService) {
   // With the new view caching in Ionic, Controllers are only called
   // when they are recreated or on app start, instead of every page change.
   // To listen for when this page is active (for example, to refresh data),
@@ -28,6 +28,22 @@ angular.module('starter.controllers',['ngCordovaOauth', 'ngAutocomplete', 'ngDis
     $scope.modal.show();
   };
 
+  $scope.doLogin = function() {
+    // retreives session / cookie
+    loginService.createSession($scope.loginData.username, $scope.loginData.password).then( sessionResult => {
+      console.log(sessionResult.data.user.id);
+
+      //logs user in and returns session
+      loginService.attemptLogin(sessionResult.data.user.id).then( loginResult => {
+        console.log('login Result -->',loginResult);
+      })
+    })
+    $timeout(function() {
+      $scope.closeLogin();
+    }, 1000);
+
+  };
+
   // Perform the login action when the user submits the login form
   $scope.facebookLogin = function() {
 
@@ -36,7 +52,6 @@ angular.module('starter.controllers',['ngCordovaOauth', 'ngAutocomplete', 'ngDis
       }, function(error) {
       console.log("Error -> " + error);
     })
-
 
     // Simulate a login delay. Remove this and replace with your login
     // code if using a login system
