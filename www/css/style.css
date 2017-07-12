@@ -27,9 +27,18 @@ html {
   padding-bottom: 2%;
 }
 
-.mapFull {
+.marker-map-full {
   width: 100%;
   height: 92%;
+}
+
+.city-map-half {
+  width: 100%;
+  height: 62%;
+}
+.city-list-half {
+  width: 100%;
+  height: 30%;
 }
 
 .mapWithDestination {

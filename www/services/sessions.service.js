@@ -8,7 +8,6 @@
     sessionService.user = {}
 
     sessionService.refresh = function () {
-      console.log('refreshing!!');
       return $http.get(`${BASE_URL}/sessions/refresh`).then(function (result) {
         var response = result.data
         response ? sessionService.user = response.user : sessionService.user = {}

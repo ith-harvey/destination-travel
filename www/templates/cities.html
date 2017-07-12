@@ -1,0 +1,22 @@
+<ion-view view-title="Cities">
+  <ion-content>
+
+    <div class="bar bar-header item-input-inset">
+        <label class="item-input-wrapper">
+            <i class="icon ion-ios-search placeholder-icon"></i>
+            <input type="text" ng-autocomplete ng-disabletap select-all-in-input ng-onenter="searchMap(result.location)" ng-model="result.location" placeholder="Search">
+          </label>
+          <div class="buttons">
+            <button class="button button-outline button-positive" ng-click="result.location=''">Cancel</button>
+          </div>
+    </div>
+
+    <div id="map" class="{{cityMapClass}}" data-tap-disabled="true"></div>
+
+    <ion-list class="{{cityListClass}}">
+      <ion-item ng-repeat="city in cities" href="#/app/trip/{{trip.id}}/cities/">
+        {{city.city_name}}
+      </ion-item>
+    </ion-list>
+  </ion-content>
+</ion-view>

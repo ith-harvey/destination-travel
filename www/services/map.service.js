@@ -21,6 +21,5 @@ angular.module('starter').service('mapService', mapService)
 
     vm.runSearch = function (address,searchMap) {
       searchMap(address)
-
     }
   }

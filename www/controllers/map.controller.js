@@ -7,7 +7,7 @@ angular.module('starter').controller('MapCtrl', function($scope, $rootScope, $st
   $scope.mapWatchService = mapService
   $scope.destinationDisplay = false
   $scope.footerActive = false
-  $scope.mapClass = 'mapFull'
+  $scope.markerMapClass = 'marker-map-full'
   const gMarkers = []
   const savedGMarkers = []
 
@@ -105,7 +105,7 @@ angular.module('starter').controller('MapCtrl', function($scope, $rootScope, $st
   }
 
   $scope.changeMapClass = function () {
-    $scope.mapClass = 'mapWithDestination'
+    $scope.markerMapClass = 'mapWithDestination'
 
   }
 

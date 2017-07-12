@@ -87,14 +87,16 @@ angular.module('starter', ['ionic', 'starter.controllers', 'ngCordova'])
         requiresLogin: true
       })
 
-    .state('app.single', {
-      url: '/trip/:playlistId',
+    .state('app.cities', {
+      url: '/trip/:id/cities',
+      params: { id: null },
       views: {
         'menuContent': {
-          templateUrl: 'templates/trip.html',
-          controller: 'TripCtrl'
+          templateUrl: 'templates/cities.html',
+          controller: 'CitiesCtrl'
         }
-      }
+      },
+      requiresLogin: true
     });
     // if none of the above states are matched, use this as the fallback
     $urlRouterProvider.otherwise('/app/home');
