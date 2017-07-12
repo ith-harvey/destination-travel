@@ -1,0 +1,9 @@
+<ion-view view-title="Trips">
+  <ion-content>
+    <ion-list>
+      <ion-item ng-repeat="trip in trips" href="#/app/trips/{{trip.id}}">
+        {{trip.name}}
+      </ion-item>
+    </ion-list>
+  </ion-content>
+</ion-view>

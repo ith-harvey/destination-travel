@@ -33,14 +33,16 @@ angular.module('starter', ['ionic', 'starter.controllers', 'ngCordova'])
       controller: 'AppCtrl'
     })
 
-    .state('app.login', {
+    .state('login', {
       url: '/login',
-      views: {
-        'menuContent': {
-          templateUrl: 'templates/login.html',
-          controller: 'loginCtrl'
-        }
-      }
+        templateUrl: 'templates/login.html',
+        controller: 'loginCtrl'
+    })
+
+    .state('signUp', {
+      url: '/signUp',
+        templateUrl: 'templates/signup.html',
+        controller: 'signUpCtrl'
     })
 
     .state('app.search', {
@@ -74,22 +76,23 @@ angular.module('starter', ['ionic', 'starter.controllers', 'ngCordova'])
       requiresLogin: true
     })
 
-      .state('app.playlists', {
-        url: '/playlists',
+      .state('app.trips', {
+        url: '/trips',
         views: {
           'menuContent': {
-            templateUrl: 'templates/playlists.html',
-            controller: 'PlaylistsCtrl'
+            templateUrl: 'templates/trips.html',
+            controller: 'TripsCtrl'
           }
-        }
+        },
+        requiresLogin: true
       })
 
     .state('app.single', {
-      url: '/playlists/:playlistId',
+      url: '/trip/:playlistId',
       views: {
         'menuContent': {
-          templateUrl: 'templates/playlist.html',
-          controller: 'PlaylistCtrl'
+          templateUrl: 'templates/trip.html',
+          controller: 'TripCtrl'
         }
       }
     });

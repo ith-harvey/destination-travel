@@ -8,22 +8,17 @@
     </div>
 
     <form ng-submit="doLogin()">
-      <div class="list">
-        <label class="item item-input">
-          <span class="input-label">Username</span>
-          <input type="text" ng-model="loginData.username">
-        </label>
-        <label class="item item-input">
-          <span class="input-label">Password</span>
-          <input type="password" ng-model="loginData.password">
-        </label>
-        <label class="item">
-          <button class="button button-block button-positive" type="submit">Log in</button>
-        </label>
-        <label class="item">
-          <button ng-click="facebookLogin()"class='button button-block button-positive'>Log in with facebook</button>
-        </label>
-      </div>
+    <label class="item item-input">
+      <span class="input-label">Username</span>
+      <input type="text" ng-model="loginData.email">
+    </label>
+    <label class="item item-input">
+      <span class="input-label">Password</span>
+      <input type="password" ng-model="loginData.password">
+    </label>
+    <button class="button button-block button-positive" type="submit">Log in</button>
+    <button ng-click="facebookLogin()"class='button button-block button-positive'>Log in with facebook</button>
+    <a ui-sref="signUp" class="button button-calm button-block button-outline">Don't have an account? Sign up!</a>
     </form>
   </ion-content>
 </ion-modal-view>

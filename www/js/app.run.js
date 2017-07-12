@@ -11,7 +11,7 @@
       if (toState.requiresLogin && !user.id) {
         var notification = 'You cannot access that page without logging in.'
         evt.preventDefault()
-        return $state.go('app.login', { notification: notification });
+        return $state.go('login', { notification: notification });
       }
     });
   }

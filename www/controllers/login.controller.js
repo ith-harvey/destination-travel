@@ -17,7 +17,7 @@ angular.module('starter')
 
   $scope.doLogin = function() {
     // retreives session / cookie
-    loginService.createSession($scope.loginData.username, $scope.loginData.password).then( sessionResult => {
+    loginService.createSession($scope.loginData.email, $scope.loginData.password).then( sessionResult => {
       console.log(sessionResult.data.user.id);
 
       //logs user in and returns session
@@ -40,5 +40,6 @@ angular.module('starter')
     // Simulate a login delay. Remove this and replace with your login
     // code if using a login system
   };
+
 
 })
