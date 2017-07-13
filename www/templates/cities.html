@@ -11,10 +11,10 @@
           </div>
     </div>
 
-    <div id="map" class="{{cityMapClass}}" data-tap-disabled="true"></div>
+    <div id="cityMap" class="{{cityMapClass}}" data-tap-disabled="true"></div>
 
     <ion-list class="{{cityListClass}}">
-      <ion-item ui-sref="app.markerMap({id: city.city_id})" ng-repeat="city in cities" href="#/app/trip/{{trip.id}}/cities/">
+      <ion-item ui-sref="app.markerMap({id: city.city_id})" ng-click="goToMarkerMap()"ng-repeat="city in cities" href="#/app/trip/{{trip.id}}/cities/">
         {{city.city_name}}
       </ion-item>
     </ion-list>
