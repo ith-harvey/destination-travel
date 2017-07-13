@@ -65,12 +65,13 @@ angular.module('starter', ['ionic', 'starter.controllers', 'ngCordova'])
       }
     })
 
-    .state('app.map', {
-      url: '/map',
+    .state('app.markerMap', {
+      url: '/markermap',
+      params: { id: null },
       views: {
         'menuContent': {
-          templateUrl: 'templates/map.html',
-          controller: 'MapCtrl'
+          templateUrl: 'templates/markerMap.html',
+          controller: 'markerMapCtrl'
         }
       },
       requiresLogin: true

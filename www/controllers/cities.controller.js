@@ -6,17 +6,21 @@ angular.module('starter')
   $scope.cities = [];
   $scope.cityMapClass = 'city-map-half'
   $scope.cityListClass = 'city-list-half'
-  $scope.savedCityMarkers = []
+  let savedCityMarkers = []
+  let bounds = new google.maps.LatLngBounds();
 
 
   let mapOptions = {
       center: ({lat: 39.82, lng: -95.712}),
       zoom: 2,
       mapTypeId: google.maps.MapTypeId.ROADMAP,
-      mapTypeControl: false
+      mapTypeControl: false,
+      streetViewControl: false
     };
 
   $scope.map = new google.maps.Map(document.getElementById("map"), mapOptions);
+
+
 
   citiesService.all().then(cities => {
     console.log(' all cities! --> ', cities);
@@ -29,16 +33,18 @@ angular.module('starter')
 
     // place a marker for each city
     $scope.cities.forEach( (city, index) => {
-      let latlng = ({lat: Number(city.city_lat), lng: Number(city.city_lng)})
-      console.log('index -->',index.toString());
+      let latlng = ({lat: Number(city.city_lat),lng: Number(city.city_lng)})
+
       let marker = new google.maps.Marker({
         position: latlng,
         map: $scope.map,
         label: index.toString()
       });
-      $scope.savedCityMarkers.push(marker)
-    })
 
+      bounds.extend(latlng);
+      savedCityMarkers.push(marker)
+    })
+    $scope.map.fitBounds(bounds)
   })
 
 

@@ -1,6 +1,8 @@
 
 
-angular.module('starter').controller('MapCtrl', function($scope, $rootScope, $state, $cordovaGeolocation, mapService) {
+angular.module('starter').controller('markerMapCtrl', function($scope, $rootScope, $state, $cordovaGeolocation, mapService, gMarkersService) {
+  console.log($state.params.id, 'state params!!');
+
   let options = {timeout: 10000, enableHighAccuracy: true};
   let geocoder = new google.maps.Geocoder();
   $scope.details
@@ -24,28 +26,27 @@ angular.module('starter').controller('MapCtrl', function($scope, $rootScope, $st
 
 
   // Once geolocation is retreived from device a new map is rendered
-  $cordovaGeolocation.getCurrentPosition(options).then(function(position) {
+  gMarkersService.allMarkersByCity($state.params.id).then(markers => {
+    console.log('what we get back from markers --> ', markers);
+  })
 
-    let latLng = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
 
-    let mapOptions = {
-        center: latLng,
-        zoom: 12,
-        mapTypeId: google.maps.MapTypeId.ROADMAP,
-        mapTypeControl: false
-      };
-
-    $scope.map = new google.maps.Map(document.getElementById("map"), mapOptions);
-
-    let marker = new google.maps.Marker({
-        map: $scope.map,
-        animation: google.maps.Animation.DROP,
-        position: latLng
-    });
-    }, function(error){
-      console.log("Could not get location");
-    }
-  )
+    // let latLng = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
+    //
+    // let mapOptions = {
+    //     center: latLng,
+    //     zoom: 12,
+    //     mapTypeId: google.maps.MapTypeId.ROADMAP,
+    //     mapTypeControl: false
+    //   };
+    //
+    // $scope.map = new google.maps.Map(document.getElementById("map"), mapOptions);
+    //
+    // let marker = new google.maps.Marker({
+    //     map: $scope.map,
+    //     animation: google.maps.Animation.DROP,
+    //     position: latLng
+    // });
 
 
  // Watches for fireSearchWithItemDetails to fire, once it does it checks for the object. If there is an object it runs search
@@ -60,7 +61,9 @@ angular.module('starter').controller('MapCtrl', function($scope, $rootScope, $st
   $scope.searchMap = function (address) {
     geocoder.geocode( { 'address': address}, function(results, status) {
       if (status === 'OK') {
-        $scope.updateMap(results[0].geometry.location)
+        console.log('results -->', results);
+        let latlng = {lat: results[0].geometry.location.lat(), lng: results[0].geometry.location.lng()}
+        $scope.updateMap(latlng)
       } else {
         alert('Geocode was not successful for the following reason: ' + status);
       }
@@ -69,6 +72,9 @@ angular.module('starter').controller('MapCtrl', function($scope, $rootScope, $st
 
   // updates the map once the lat lng is retreived from geocoder has been run or rather (onblur)
   $scope.updateMap = function (latLng) {
+    console.log('latlng -->',latLng)
+
+
     $scope.map.setCenter(latLng)
     $scope.map.setZoom(15)
 
