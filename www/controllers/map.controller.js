@@ -14,17 +14,6 @@ angular.module('starter').controller('markerMapCtrl', function($scope, $rootScop
 
 
 
-  // declare modal
-  $ionicModal.fromTemplateUrl('templates/description-modal.html', function(modal) {
-        $scope.modal = modal
-      }, {
-        animation: 'slide-in-up',
-        focusFirstInput: true,
-        scope: $scope
-      })
-
-
-  // Map gets initialized to to world view
   let mapOptions = {
     center: ({
       lat: 39.82,
@@ -37,36 +26,59 @@ angular.module('starter').controller('markerMapCtrl', function($scope, $rootScop
 
   $scope.markerMap = new google.maps.Map(document.getElementById("markerMap"), mapOptions);
 
+  $scope.$on( '$ionicView.enter', function () {
+    $scope.footerActive = false
+    resetSearchedPoint()
+    // Once markers are retreived from device a new map is rendered
+    gMarkersService.allMarkersByCity(city_id).then(markers => {
+      console.log('code is run!');
+      console.log('this is gMarkers', gMarkers);
 
-  // Once markers are retreived from device a new map is rendered
-  gMarkersService.allMarkersByCity(city_id).then(markers => {
-    console.log('what we get back from markers --> ', markers);
 
-    // place a marker for each city
-    markers.data.markers.forEach((dbmarker, index) => {
-      const latlng = ({
-        lat: Number(dbmarker.marker_lat),
-        lng: Number(dbmarker.marker_lng)
+      console.log('this is the marker map does it exist?',document.getElementById("markerMap"));
+
+      // place a marker for each city
+      markers.data.markers.forEach((dbmarker, index) => {
+        const latlng = ({
+          lat: Number(dbmarker.marker_lat),
+          lng: Number(dbmarker.marker_lng)
+        })
+
+        let image = {
+          url: 'img/Gold_star.png',
+          scaledSize: new google.maps.Size(20, 20),
+          origin: new google.maps.Point(0, 0),
+          anchor: new google.maps.Point(0, 32)
+        }
+
+        let marker = new google.maps.Marker({
+          position: latlng,
+          animation: google.maps.Animation.DROP,
+          map: $scope.markerMap,
+          icon: image
+        });
+        bounds.extend(latlng);
+        savedGMarkers.push(marker)
+        console.log('pushing into saved gMarkers');
+      })
+      $scope.markerMap.fitBounds(bounds)
+    })
+  })
+
+
+
+  // declare modal
+  $ionicModal.fromTemplateUrl('templates/description-modal.html', function(modal) {
+        $scope.modal = modal
+      }, {
+        animation: 'slide-in-up',
+        focusFirstInput: true,
+        scope: $scope
       })
 
-      let image = {
-        url: 'img/Gold_star.png',
-        scaledSize: new google.maps.Size(20, 20),
-        origin: new google.maps.Point(0, 0),
-        anchor: new google.maps.Point(0, 32)
-      }
 
-      let marker = new google.maps.Marker({
-        position: latlng,
-        animation: google.maps.Animation.DROP,
-        map: $scope.markerMap,
-        icon: image
-      });
-      bounds.extend(latlng);
-      savedGMarkers.push(marker)
-    })
-    $scope.markerMap.fitBounds(bounds)
-  })
+
+
 
 
   // Watches for fireSearchWithItemDetails to fire, once it does it checks for the object. If there is an object it runs search
@@ -79,11 +91,11 @@ angular.module('starter').controller('markerMapCtrl', function($scope, $rootScop
 
   // retreives lat lng using googles geocode
   $scope.searchMap = function(address) {
+    resetSearchedPoint()
     geocoder.geocode({
       'address': address
     }, function(results, status) {
       if (status === 'OK') {
-        console.log('results -->', results);
         let latlng = {
           lat: results[0].geometry.location.lat(),
           lng: results[0].geometry.location.lng()
@@ -97,7 +109,6 @@ angular.module('starter').controller('markerMapCtrl', function($scope, $rootScop
 
   // updates the map on search
   $scope.updateMap = function(latLng) {
-    console.log('latlng -->', latLng)
 
     $scope.markerMap.setCenter(latLng)
     $scope.markerMap.setZoom(15)
@@ -151,11 +162,11 @@ angular.module('starter').controller('markerMapCtrl', function($scope, $rootScop
 
   $scope.saveLocation = function() {
 
-    console.log('in save location');
     let lat = mapService.getSearchItemDetails().geometry.location.lat()
     let lng = mapService.getSearchItemDetails().geometry.location.lng()
 
     gMarkers.pop().setMap(null)
+
     let image = {
       url: 'img/Gold_star.png',
       scaledSize: new google.maps.Size(20, 20),
@@ -171,6 +182,7 @@ angular.module('starter').controller('markerMapCtrl', function($scope, $rootScop
 
     //pushing marker(gmaps formatted) into local array
     savedGMarkers.push(marker)
+    console.log('saved g marker push');
 
     let dbmarker = {
       city_id: city_id,
@@ -179,17 +191,20 @@ angular.module('starter').controller('markerMapCtrl', function($scope, $rootScop
       marker_lat: lat.toString(),
       marker_lng: lng.toString()
     }
-    console.log('dbmarker',dbmarker);
-
     //posting marker(dbase formatted)
     gMarkersService.markerPost(city_id, dbmarker).then(result => {
       console.log('result from gMarkers Service', result);
     })
-
   }
 
   $scope.stopProp = function ($event) {
     $event.stopPropagation()
+  }
+
+  function resetSearchedPoint() {
+    if (gMarkers.length) {
+      gMarkers.pop().setMap(null)
+    }
   }
 
 })

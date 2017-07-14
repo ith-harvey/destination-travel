@@ -9,6 +9,8 @@ angular.module('starter')
   let savedCityMarkers = []
   let bounds = new google.maps.LatLngBounds();
 
+  console.log('this is the marker map does it exist?',document.getElementById("markerMap"));
+
   citiesService.all().then(cities => {
     $scope.cities = cities.data.trips
   })
