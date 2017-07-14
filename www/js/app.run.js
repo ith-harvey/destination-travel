@@ -3,7 +3,7 @@
 
   run.$inject = ['$rootScope', '$state', 'SessionsService']
 
-  function run ($rootScope, $state, SessionsService) {
+  function run ($rootScope, $state, SessionsService,) {
     $rootScope.$on('$stateChangeStart', function (evt, toState, toParams, fromState, fromParams) {
       var user = SessionsService.user
 

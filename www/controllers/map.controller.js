@@ -1,13 +1,27 @@
-angular.module('starter').controller('markerMapCtrl', function($scope, $rootScope, $state, mapService, gMarkersService) {
+angular.module('starter').controller('markerMapCtrl', function($scope, $rootScope, $state, mapService, gMarkersService, $ionicModal) {
   let geocoder = new google.maps.Geocoder();
+  let city_id = $state.params.id
   $scope.details
   $scope.mapWatchService = mapService
   $scope.destinationDisplay = false
   $scope.footerActive = false
-  $scope.markerMapClass = 'marker-map-full'
-  const gMarkers = []
-  const savedGMarkers = []
+  $scope.markerMapClass = ''
+  $scope.savedMarkers = gMarkersService.getMarkers()
   bounds = new google.maps.LatLngBounds();
+  $scope.modal
+  $scope.description = {}
+
+
+
+  // declare modal
+
+  $ionicModal.fromTemplateUrl('templates/description-modal.html', function(modal) {
+        $scope.modal = modal
+      }, {
+        animation: 'slide-in-up',
+        focusFirstInput: true,
+        scope: $scope
+      })
 
 
   // Map gets initialized to to world view
@@ -25,7 +39,7 @@ angular.module('starter').controller('markerMapCtrl', function($scope, $rootScop
 
 
   // Once markers are retreived from device a new map is rendered
-  gMarkersService.allMarkersByCity($state.params.id).then(markers => {
+  gMarkersService.allMarkersByCity(city_id).then(markers => {
     console.log('what we get back from markers --> ', markers);
 
     // place a marker for each city
@@ -34,10 +48,19 @@ angular.module('starter').controller('markerMapCtrl', function($scope, $rootScop
         lat: Number(dbmarker.marker_lat),
         lng: Number(dbmarker.marker_lng)
       })
+
+      let image = {
+        url: 'img/Gold_star.png',
+        scaledSize: new google.maps.Size(20, 20),
+        origin: new google.maps.Point(0, 0),
+        anchor: new google.maps.Point(0, 32)
+      }
+
       let marker = new google.maps.Marker({
         position: latlng,
         animation: google.maps.Animation.DROP,
         map: $scope.markerMap,
+        icon: image
       });
       bounds.extend(latlng);
       savedGMarkers.push(marker)
@@ -72,10 +95,9 @@ angular.module('starter').controller('markerMapCtrl', function($scope, $rootScop
     });
   }
 
-  // updates the map once the lat lng is retreived from geocoder has been run or rather (onblur)
+  // updates the map on search
   $scope.updateMap = function(latLng) {
     console.log('latlng -->', latLng)
-
 
     $scope.markerMap.setCenter(latLng)
     $scope.markerMap.setZoom(15)
@@ -85,7 +107,7 @@ angular.module('starter').controller('markerMapCtrl', function($scope, $rootScop
 
       let image = {
         url: $scope.details.icon,
-        scaledSize: new google.maps.Size(20, 20),
+        scaledSize: new google.maps.Size(30, 30),
         origin: new google.maps.Point(0, 0),
         anchor: new google.maps.Point(0, 32)
       }
@@ -113,7 +135,7 @@ angular.module('starter').controller('markerMapCtrl', function($scope, $rootScop
   }
 
   $scope.changeMapClass = function() {
-    $scope.markerMapClass = 'mapWithDestination'
+    $scope.markerMapClass = 'map-with-destination'
 
   }
 
@@ -127,35 +149,46 @@ angular.module('starter').controller('markerMapCtrl', function($scope, $rootScop
     $event.target.select();
   };
 
-  $scope.saveLocation = function(destinationObj) {
+  $scope.saveLocation = function() {
+
+    console.log('in save location');
     let lat = mapService.getSearchItemDetails().geometry.location.lat()
     let lng = mapService.getSearchItemDetails().geometry.location.lng()
 
-    // let latlng = ({mapService.getSearchItemDetails().geometry.location.lat(), mapService.getSearchItemDetails().geometry.location.lng()})
     gMarkers.pop().setMap(null)
-    console.log('here is gMarkers', gMarkers);
-    console.log(mapService.getSearchItemDetails().geometry.location.lat());
-    console.log('inside of save location');
     let image = {
       url: 'img/Gold_star.png',
-      scaledSize: new google.maps.Size(60, 60),
+      scaledSize: new google.maps.Size(20, 20),
       origin: new google.maps.Point(0, 0),
       anchor: new google.maps.Point(0, 32)
     }
 
     let marker = new google.maps.Marker({
-      position: ({
-        lat,
-        lng
-      }),
+      position: ({lat,lng}),
       map: $scope.markerMap,
       icon: image
     });
-
+    //pushing marker(gmaps formatted) into local array
     savedGMarkers.push(marker)
+
+    let dbmarker = {
+      city_id: city_id,
+      marker_name: $scope.details.name,
+      marker_description: $scope.description.input,
+      marker_lat: lat,
+      marker_lng: lng
+    }
+    console.log('dbmarker',dbmarker);
+
+    //posting marker(dbase formatted)
+    gMarkersService.markerPost(city_id, dbmarker).then(result => {
+      console.log(result);
+    })
 
   }
 
-
+  $scope.stopProp = function ($event) {
+    $event.stopPropagation()
+  }
 
 })

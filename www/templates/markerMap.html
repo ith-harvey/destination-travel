@@ -29,10 +29,9 @@
     </div>
 
 
-
     <ion-footer-bar ng-show="!destinationDisplay&&footerActive" ng-click="displayFire()" id="destinationFooterBar" align-title="left" class="bar-assertive">
       <h1 class="title">{{details.name}}</h1>
-      <div class="buttons" ng-click="saveLocation()">
+      <div class="buttons" ng-click="modal.show(); stopProp($event)">
         <button class="button">
           <div id="star-button-div">
             <img class="gold-star" src="../img/Gold_star.png">
