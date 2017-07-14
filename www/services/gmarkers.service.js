@@ -24,7 +24,11 @@
         console.log(savedMarker);
       return $http({url: `${BASE_URL}/markers/cities/${cityId}`, method: "POST", data: { 'savedMarker' : savedMarker }
         })
-
       }
-  }
+
+      gMarkersService.markerDelete = function (markerId) {
+        console.log(markerId);
+        return $http.delete(`${BASE_URL}/markers/${savedMarker.id}`)
+      }
+    }
 }());

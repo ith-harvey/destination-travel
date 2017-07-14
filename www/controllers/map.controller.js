@@ -11,6 +11,7 @@ angular.module('starter').controller('markerMapCtrl', function($scope, $rootScop
   bounds = new google.maps.LatLngBounds();
   $scope.modal
   $scope.description = {}
+  $scope.marker = {}
 
 
 
@@ -75,9 +76,6 @@ angular.module('starter').controller('markerMapCtrl', function($scope, $rootScop
         focusFirstInput: true,
         scope: $scope
       })
-
-
-
 
 
 
@@ -195,6 +193,7 @@ angular.module('starter').controller('markerMapCtrl', function($scope, $rootScop
     gMarkersService.markerPost(city_id, dbmarker).then(result => {
       console.log('result from gMarkers Service', result);
     })
+
   }
 
   $scope.stopProp = function ($event) {
