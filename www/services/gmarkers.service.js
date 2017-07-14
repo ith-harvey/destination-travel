@@ -5,17 +5,7 @@
     service.$inject = ['BASE_URL', '$http']
 
     function service (BASE_URL, $http) {
-      let savedMarkers = []
-
       const gMarkersService = this
-
-      gMarkersService.saveMarker = function (marker) {
-        savedMarkers.push(marker)
-      }
-
-      gMarkersService.getMarkers = function () {
-        return savedMarkers
-      }
 
       gMarkersService.all = function () {
         return $http.get(`${BASE_URL}/markers`)

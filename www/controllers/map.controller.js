@@ -6,7 +6,8 @@ angular.module('starter').controller('markerMapCtrl', function($scope, $rootScop
   $scope.destinationDisplay = false
   $scope.footerActive = false
   $scope.markerMapClass = ''
-  $scope.savedMarkers = gMarkersService.getMarkers()
+  let savedGMarkers = []
+  let gMarkers = []
   bounds = new google.maps.LatLngBounds();
   $scope.modal
   $scope.description = {}
@@ -14,7 +15,6 @@ angular.module('starter').controller('markerMapCtrl', function($scope, $rootScop
 
 
   // declare modal
-
   $ionicModal.fromTemplateUrl('templates/description-modal.html', function(modal) {
         $scope.modal = modal
       }, {
@@ -168,6 +168,7 @@ angular.module('starter').controller('markerMapCtrl', function($scope, $rootScop
       map: $scope.markerMap,
       icon: image
     });
+
     //pushing marker(gmaps formatted) into local array
     savedGMarkers.push(marker)
 
@@ -175,14 +176,14 @@ angular.module('starter').controller('markerMapCtrl', function($scope, $rootScop
       city_id: city_id,
       marker_name: $scope.details.name,
       marker_description: $scope.description.input,
-      marker_lat: lat,
-      marker_lng: lng
+      marker_lat: lat.toString(),
+      marker_lng: lng.toString()
     }
     console.log('dbmarker',dbmarker);
 
     //posting marker(dbase formatted)
     gMarkersService.markerPost(city_id, dbmarker).then(result => {
-      console.log(result);
+      console.log('result from gMarkers Service', result);
     })
 
   }
