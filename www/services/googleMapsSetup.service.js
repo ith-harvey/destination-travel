@@ -1,10 +1,10 @@
 (function() {
   angular.module('starter')
-    .service('mapService', service, mapDetailsService)
+    .service('mapService', service)
 
-    service.$inject = []
+    service.$inject = ['mapDetailsService']
 
-    function service () {
+    function service (mapDetailsService) {
       const mapService = this
       let map
       let savedMarkersArr = []

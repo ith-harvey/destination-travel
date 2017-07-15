@@ -52,25 +52,10 @@ angular.module('starter').controller('markerMapCtrl', function($scope, $rootScop
   // retreives lat lng using googles geocode
   $scope.searchMap = function(address) {
     mapService.search(address)
-    // resetSearchedPoint()
-    // geocoder.geocode({
-    //   'address': address
-    // }, function(results, status) {
-    //   if (status === 'OK') {
-    //     let latlng = {
-    //       lat: results[0].geometry.location.lat(),
-    //       lng: results[0].geometry.location.lng()
-    //     }
-    //     $scope.updateMap(latlng)
-    //   } else {
-    //     alert('Geocode was not successful for the following reason: ' + status);
-    //   }
-    // });
   }
 
   // updates the map on search
   $scope.updateMap = function(latLng) {
-
     mapService.updateMap(latlng)
       $scope.footerActive = true
       $scope.changeMapClass()

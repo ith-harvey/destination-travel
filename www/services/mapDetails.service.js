@@ -16,6 +16,7 @@ angular.module('starter').service('mapDetailsService', mapDetailsService)
     }
 
     vm.saveSearchItemDetails = function (details) {
+      console.log('saving the details right quick');
       vm.details = details
       vm.fireSearchWithItemDetails()
     }
@@ -24,4 +25,3 @@ angular.module('starter').service('mapDetailsService', mapDetailsService)
       searchMap(address)
     }
   }
-cd 

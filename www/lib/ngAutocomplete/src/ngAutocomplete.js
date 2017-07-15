@@ -90,7 +90,7 @@ angular.module( "ngAutocomplete", ['starter'])
 
               scope.$apply(function() {
                 scope.details = result;
-                console.log('scope.details.formatted_address',scope.details.formatted_address);
+                console.log('scope.details running save',scope.details);
                 mapDetailsService.saveSearchItemDetails(scope.details)
 
 
