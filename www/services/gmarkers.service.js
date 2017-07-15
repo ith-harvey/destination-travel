@@ -12,7 +12,6 @@
       }
 
       gMarkersService.allMarkersByCity = function (cityId) {
-        console.log('city id --> ', cityId);
         return $http.get(`${BASE_URL}/markers/cities/${cityId}`)
       }
 
@@ -21,8 +20,7 @@
       }
 
       gMarkersService.markerPost = function (cityId, savedMarker) {
-        console.log(savedMarker);
-      return $http({url: `${BASE_URL}/markers/cities/${cityId}`, method: "POST", data: { 'savedMarker' : savedMarker }
+        return $http({url: `${BASE_URL}/markers/cities/${cityId}`, method: "POST", data: { 'savedMarker' : savedMarker }
         })
       }
 
