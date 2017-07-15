@@ -1,12 +1,13 @@
-angular.module('starter').service('mapService', mapService)
+angular.module('starter').service('mapDetailsService', mapDetailsService)
 
-  mapService.$inject = ['$cordovaGeolocation']
+  mapDetailsService.$inject = ['$cordovaGeolocation']
 
-  function mapService($cordovaGeolocation, searchMap) {
+  function mapDetailsService($cordovaGeolocation, searchMap) {
     const vm = this
     vm.details = ''
 
     vm.getSearchItemDetails = function () {
+      console.log('in getSearchItemDetails');
       return vm.details
     }
 
@@ -23,3 +24,4 @@ angular.module('starter').service('mapService', mapService)
       searchMap(address)
     }
   }
+cd 
