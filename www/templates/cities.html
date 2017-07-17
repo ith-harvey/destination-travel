@@ -1,5 +1,30 @@
 <ion-view view-title="Cities">
+
+  <ion-nav-bar>
+    <ion-nav-buttons side="right">
+            <i class="ion-ios-plus-outline navicon"></i>
+    </ion-nav-buttons>
+    </ion-nav-bar>
+
   <ion-content>
+
+
+    <div class="card" id="destinationDisplay" ng-if="destinationDisplay" ng-click="displayFire()">
+      <div scroll="true" class="item item-text-wrap">
+        <h1 class="title">{{destinationDisplayCity.currCity.city_name}}</h1>
+        <h2>{{}}</h2>
+        <p>rating: {{}}</p>
+        <p>price level: {{}}</p>
+        <p>{{}}</p>
+        <p>Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable source. Lorem Ipsum comes from sections 1.10.32 and 1.10.33 of "de Finibus Bonorum et Malorum" (The Extremes of Good and Evil) by Cicero, written in 45 BC. This book is a treatise on the theory of ethics, very popular during the Renaissance. The first line of Lorem Ipsum, "Lorem ipsum dolor sit amet..", comes from a line in section 1.10.32.</p>
+        <p>{{details.international_phone_number}}</p>
+        <a href="{{details.webiste}}">{{details.webiste}}</a>
+      </div>
+    </div>
+
+
+
+
 
     <div class="bar bar-header item-input-inset">
         <label class="item-input-wrapper">
@@ -13,10 +38,17 @@
 
     <div id="cityMap" class="{{cityMapClass}}" data-tap-disabled="true"></div>
 
-    <ion-list class="{{cityListClass}}">
-      <ion-item ui-sref="app.markerMap({id: city.city_id})" ng-click="goToMarkerMap()"ng-repeat="city in cities" href="#/app/trip/{{trip.id}}/cities/">
-        {{city.city_name}}
-      </ion-item>
-    </ion-list>
+    <ion-scroll direction="y" class="city-list-half">
+      <ion-list>
+
+        <!-- I think i have to change the ui-sref to a function call and use $statechange. propigation still occurs if it's a ui-sref vs a function call ... I think -->
+
+        <ion-item ng-repeat="city in cities">
+            {{city.letter}}{{city.city_name}}
+            <button class="button small_button button-outline button-positive" ng-click="displayFire(city, $event)"><i class="icon small_button ion-ios-search ion-search"></i></button>
+            <button class="button small_button button-outline button-positive" ui-sref="app.markerMap({id: city.city_id})">Marker Map</button>
+        </ion-item>
+      </ion-list>
+    </ion-scroll>
   </ion-content>
 </ion-view>

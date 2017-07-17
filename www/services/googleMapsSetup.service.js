@@ -13,6 +13,13 @@
       let searchedMarker = []
       let starredMarkers = []
 
+      let alphabetArr =[ 'a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z' ]
+
+
+      mapService.getAlphabetArr = function () {
+        return alphabetArr
+      }
+
 
       // initializes the map
       mapService.render = function (mapid, zoom) {
@@ -43,7 +50,7 @@
             position: latlng,
             map: map,
             animation: google.maps.Animation.DROP,
-            label: index.toString(),
+            label: alphabetArr[index],
             icon: iconImage
           });
           bounds.extend(latlng);

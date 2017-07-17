@@ -5,6 +5,8 @@ html {
 }
 
 
+
+
 .noPadding {
   padding-top: 0px;
   padding-bottom: 0px;
@@ -12,6 +14,10 @@ html {
 
 .scroll {
   height: 100%;
+}
+
+.navicon {
+  height: 6%;
 }
 
 .pac-container {
@@ -55,6 +61,7 @@ html {
 .text-area {
   height: 5rem;
 }
+
 .gold-star {
   height: 1.5rem;
   position: relative;
@@ -63,6 +70,12 @@ html {
 .star-text-p {
   height: 1.5rem;
   position: absolute;
+}
+
+.small_button {
+  line-height: 5px;
+  min-height: 35px;
+  text-align:right;
 }
 
 #star-button-div {
@@ -78,5 +91,6 @@ html {
 #destinationDisplay {
   height: 80%;
   top: 10%;
-  position: fixed;
+  position: absolute;
+  z-index: 99;
 }
