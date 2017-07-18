@@ -3,18 +3,20 @@
 angular.module('starter').controller('CitiesCtrl', function($scope, $state, citiesService, SessionsService, mapService) {
 
   $scope.destinationDisplay = false
+  $scope.cityAddDisplay = false
   const alphabetArr = mapService.getAlphabetArr()
   $scope.cities = [];
-  $scope.cityMapClass = 'city-map-half'
-  $scope.cityListClass = 'city-list-half'
+  $scope.cityMapClass = 'map-half'
+  $scope.cityListClass = 'list-half'
+  $scope.searchBarClass = 'search-hide'
   $scope.destinationDisplayCity = {}
+  $scope.alphabetArr = mapService.getAlphabetArr()
 
   citiesService.all().then(cities => {
     $scope.cities = cities.data.trips
   })
 
   citiesService.allCitiesByTrip($state.params.id).then(cities => {
-    console.log('what we get from',cities);
 
     //render the map function profile = .render(mapId, mapZoom)
     mapService.render("cityMap",2)
@@ -41,16 +43,41 @@ angular.module('starter').controller('CitiesCtrl', function($scope, $state, citi
 
   }
 
-  // $scope.stopProp = function ($event) {
-  //   $event.stopPropagation()
-  // }
+  $scope.displayFire = function (city) {
+    $scope.destinationDisplayCity.destinationCitydbResponse = city
 
-  $scope.displayFire = function(city, $event) {
-    $scope.destinationDisplayCity.currCity = city
+    mapService.getPlaceInfo(city.city_place_id, function (place,status) {
+      $scope.$apply(function () {
+        $scope.destinationDisplayCity.googCityResponse = place
+      })
+    })
+
     $scope.destinationDisplay ? $scope.destinationDisplay = false : $scope.destinationDisplay = true
-    console.log($scope.destinationDisplay, 'is it showing!');
   }
 
-  $scope.alphabetArr = mapService.getAlphabetArr()
+
+
+  $scope.deleteCity = function (city) {
+    $scope.cities.splice($scope.cities.indexOf(city),1);
+    // mapService.removeMarker()
+    citiesService.delete(city.city_id).then( response => {
+      console.log(response);
+    })
+  }
+
+  $scope.cityChangeDisplay = function () {
+    if ($scope.cityAddDisplay === false) {
+      $scope.cityMapClass = 'map-full'
+      $scope.cityListClass = 'list-hide'
+      $scope.searchBarClass = 'search-show'
+      $scope.cityAddDisplay = true
+    } else {
+      $scope.cityMapClass = 'map-half'
+      $scope.cityListClass = 'list-half'
+      $scope.searchBarClass = 'search-hide'
+      $scope.cityAddDisplay = false
+    }
+  }
+
 
 })

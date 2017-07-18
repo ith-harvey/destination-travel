@@ -24,9 +24,9 @@
         })
       }
 
-      gMarkersService.markerDelete = function (markerId) {
-        console.log(markerId);
-        return $http.delete(`${BASE_URL}/markers/${savedMarker.id}`)
+      gMarkersService.delete = function (markerId) {
+        console.log('markerid',markerId);
+        return $http.delete(`${BASE_URL}/markers/${markerId}`)
       }
     }
 }());

@@ -19,5 +19,10 @@
       citiesService.show = function (id) {
         return $http.get(`${BASE_URL}/trips/${id}`)
       }
+
+      citiesService.delete = function (cityId) {
+        console.log(cityId);
+        return $http.delete(`${BASE_URL}/cities/${cityId}`)
+      }
   }
 }());

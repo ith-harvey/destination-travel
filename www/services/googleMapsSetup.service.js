@@ -23,7 +23,6 @@
 
       // initializes the map
       mapService.render = function (mapid, zoom) {
-        console.log('in render');
         let mapOptions = {
           center: ({
             lat: 39.82,
@@ -56,9 +55,10 @@
           bounds.extend(latlng);
           savedMarkersArr.push(marker)
         })
-        console.log('loging bounds-->', bounds);
         map.fitBounds(bounds)
       }
+
+
 
 
       // takes address and fires updateMap with lat and lng
@@ -69,7 +69,6 @@
               lat: results[0].geometry.location.lat(),
               lng: results[0].geometry.location.lng()
             }
-            console.log('logging latlng -->', latlng);
             mapService.updateMap(latlng)
           } else {
             console.error('Geocode was not successful --> ' + status);
@@ -139,6 +138,17 @@
         })
       }
 
+      mapService.getPlaceInfo = function (placeId,callback) {
+        service = new google.maps.places.PlacesService(map);
+        service.getDetails({placeId: placeId}, callback)
+      }
+
+
+      // under construction
+      mapService.removeMarker = function (marker,index) {
+        console.log(marker);
+        savedMarkersArr.splice(savedMarkersArr.indexOf(marker))
+      }
 
     }
 }());

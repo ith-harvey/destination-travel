@@ -1,7 +1,15 @@
-<ion-view>
+<ion-view view-title="Locations">
+
+  <ion-nav-bar>
+    <ion-nav-buttons side="right">
+            <i ng-hide="markerAddDisplay" ng-click="markerChangeDisplay()" class="ion-ios-plus-outline navicon"></i>
+            <i ng-show="markerAddDisplay" ng-click="markerChangeDisplay()" class="ion-navicon-round navicon"></i>
+    </ion-nav-buttons>
+  </ion-nav-bar>
+
   <ion-content>
 
-    <div class="bar bar-header item-input-inset">
+    <div class="bar bar-header {{searchBarClass}} item-input-inset">
         <label class="item-input-wrapper">
             <i class="icon ion-ios-search placeholder-icon"></i>
             <input type="text" ng-autocomplete ng-disabletap select-all-in-input ng-onenter="searchMap(result.location)" ng-model="result.location" placeholder="Search">
@@ -12,7 +20,7 @@
     </div>
 
 
-    <div id="markerMap" class="marker-map-full" data-tap-disabled="true"></div>
+    <div id="markerMap" class="map-full {{markerMapClass}}" data-tap-disabled="true"></div>
 
     <div class="card" id="destinationDisplay" ng-if="destinationDisplay" ng-click="displayFire()">
       <div scroll="true" class="item item-text-wrap">
@@ -21,14 +29,25 @@
         <p>rating: {{details.rating}}</p>
         <p>price level: {{details.price_level}}</p>
         <p>{{details.opening_hours.weekday_text[0]}}</p>
-        <p>Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable source. Lorem Ipsum comes from sections 1.10.32 and 1.10.33 of "de Finibus Bonorum et Malorum" (The Extremes of Good and Evil) by Cicero, written in 45 BC. This book is a treatise on the theory of ethics, very popular during the Renaissance. The first line of Lorem Ipsum, "Lorem ipsum dolor sit amet..", comes from a line in section 1.10.32.</p>
         <p>{{details.international_phone_number}}</p>
         <a href="{{details.webiste}}">{{details.webiste}}</a>
       </div>
+      <div class="buttons">
+        <button class="button button-outline button-positive" ng-click="deleteMarker(details.markerDbObj)">Delete</button>
+      </div>
     </div>
 
+    <ion-scroll direction="y" class="{{cityListClass}}">
+      <ion-list>
+        <ion-item ng-repeat="marker in markers">
+            {{marker.letter}}{{marker.marker_name}}
+            <button class="button small_button button-outline button-positive" ng-click="displayFire(marker)"><i class="icon small_button ion-ios-search ion-search"></i></button>
+        </ion-item>
+      </ion-list>
+    </ion-scroll>
 
-    <ion-footer-bar ng-show="!destinationDisplay&&footerActive" ng-click="displayFire()" id="destinationFooterBar" align-title="left" class="bar-assertive">
+
+    <ion-footer-bar ng-show="!destinationDisplay&&footerActive&&markerAddDisplay" ng-click="displayFire()" id="destinationFooterBar" align-title="left" class="bar-assertive">
       <h1 class="title">{{details.name}}</h1>
       <div class="buttons" ng-click="modal.show(); stopProp($event)">
         <button class="button">
