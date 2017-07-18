@@ -2,9 +2,9 @@
   angular.module('starter')
     .service('mapService', service)
 
-    service.$inject = ['mapDetailsService', 'gMarkersService']
+    service.$inject = ['mapDetailsService', 'gMarkersService', 'citiesService']
 
-    function service (mapDetailsService, gMarkersService) {
+    function service (mapDetailsService, gMarkersService, citiesService) {
 
       const mapService = this
       let map
@@ -100,7 +100,7 @@
       }
 
 
-      mapService.saveLocation = function(city_id, description) {
+      mapService.saveLocation = function(resource, description, postToId ) {
 
         let details = mapDetailsService.getSearchItemDetails()
         let lat = details.geometry.location.lat()
@@ -123,19 +123,27 @@
 
         //pushing marker(gmaps formatted) into local array
         starredMarkers.push(marker)
+          let dbmarker = {}
 
-        let dbmarker = {
-          city_id: city_id,
-          marker_name: details.name,
-          marker_description: description,
-          marker_lat: lat.toString(),
-          marker_lng: lng.toString()
+          dbmarker[`${resource}_name`] = details.name,
+          dbmarker[`${resource}_description`] = description,
+          dbmarker[`${resource}_lat`] = lat.toString(),
+          dbmarker[`${resource}_lng`] = lng.toString()
+
+        if (resource === 'city') {
+          citiesService.post(postToId,dbmarker).then(result => {
+            console.log('result from cities Service', result);
+          })
         }
 
-        //posting marker(dbase formatted)
-        gMarkersService.markerPost(city_id, dbmarker).then(result => {
-          console.log('result from gMarkers Service', result);
-        })
+        if (resource === 'marker') {
+          //posting marker(dbase formatted)
+          dbmarker.city_id = postToId
+          gMarkersService.markerPost(postToId, dbmarker).then(result => {
+            console.log('result from gMarkers Service', result);
+          })
+        }
+
       }
 
       mapService.getPlaceInfo = function (placeId,callback) {

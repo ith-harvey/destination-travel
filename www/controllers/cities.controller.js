@@ -11,6 +11,7 @@ angular.module('starter').controller('CitiesCtrl', function($scope, $state, citi
   $scope.cityListClass = 'list-half'
   $scope.searchBarClass = 'search-hide'
   $scope.destinationDisplayCity = {}
+  $scope.description = {}
   $scope.alphabetArr = mapService.getAlphabetArr()
 
 
@@ -22,8 +23,6 @@ angular.module('starter').controller('CitiesCtrl', function($scope, $state, citi
     focusFirstInput: true,
     scope: $scope
   })
-
-
 
   citiesService.all().then(cities => {
     $scope.cities = cities.data.trips
@@ -41,36 +40,30 @@ angular.module('starter').controller('CitiesCtrl', function($scope, $state, citi
       value.letter = alphabetArr[index] +'. '
       return value
     })
-
-    //place city markers function profile = .placeMarkers(arrayOfCities)
-
   })
 
   $scope.searchMap = function(address) {
     mapService.search(address)
     $scope.footerActive = true
     $scope.cityMapClass = 'map-with-destination'
-    $scope.details = mapDetailsService.getSearchItemDetails()
-
+    $scope.googDetails = mapDetailsService.getSearchItemDetails()
   }
 
-  $scope.displayFire = function (city) {
-    let city_id
-    if (city.city_place_id) {
-      city_id = city.city_place_id
-    } else {
-      city_id = city.place_id
+  $scope.displayFire = function (city_place_id, city) {
+    if (city) {
+      $scope.dbDetails = city
     }
-    mapService.getPlaceInfo(city_id, function (place,status) {
+    mapService.getPlaceInfo(city_place_id, function (place,status) {
       $scope.$apply(function () {
-        $scope.details = place
-        $scope.destinationDisplayCity.googCityResponse = place
-        $scope.destinationDisplayCity.destinationCitydbResponse = city
+        $scope.googDetails = place
+        $scope.cardDisplayChange()
       })
     })
-    $scope.destinationDisplay ? $scope.destinationDisplay = false : $scope.destinationDisplay = true
   }
 
+  $scope.cardDisplayChange = function() {
+    $scope.destinationDisplay ? $scope.destinationDisplay = false : $scope.destinationDisplay = true
+  }
 
 
   $scope.deleteCity = function (city) {
@@ -93,6 +86,11 @@ angular.module('starter').controller('CitiesCtrl', function($scope, $state, citi
       $scope.searchBarClass = 'search-hide'
       $scope.cityAddDisplay = false
     }
+  }
+
+  $scope.saveCityLocation = function () {
+
+      mapService.saveLocation('city',$scope.description.input,$state.params.id)
   }
 
 

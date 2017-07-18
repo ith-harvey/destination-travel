@@ -26,6 +26,8 @@ angular.module('starter')
     scope: $scope
   })
 
+  
+
 
   mapService.render('markerMap', 2)
 
@@ -93,7 +95,7 @@ angular.module('starter')
   };
 
   $scope.saveLocation = function() {
-    mapService.saveLocation(city_id ,$scope.description.input)
+    mapService.saveLocation('marker', $scope.description.input, city_id)
   }
 
   $scope.stopProp = function ($event) {

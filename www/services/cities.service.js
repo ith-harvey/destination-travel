@@ -16,8 +16,10 @@
         return $http.get(`${BASE_URL}/cities/trips/${tripId}`)
       }
 
-      citiesService.show = function (id) {
-        return $http.get(`${BASE_URL}/trips/${id}`)
+      citiesService.post = function (tripId, data) {
+        console.log('post -->',data);
+        console.log('post -->',tripId);
+        return $http.post(`${BASE_URL}/cities/trips/${tripId}`, data)
       }
 
       citiesService.delete = function (cityId) {
