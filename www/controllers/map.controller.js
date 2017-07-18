@@ -101,6 +101,7 @@ angular.module('starter')
 
   $scope.saveLocation = function() {
     mapService.saveLocation('marker', $scope.description.input, currCity.city_id)
+    $scope.description.input = ''
   }
 
   $scope.stopProp = function ($event) {

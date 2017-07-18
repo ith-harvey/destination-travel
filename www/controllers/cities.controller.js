@@ -102,8 +102,12 @@ angular.module('starter').controller('CitiesCtrl', function($scope, $state, citi
   }
 
   $scope.saveCityLocation = function () {
-
       mapService.saveLocation('city',$scope.description.input,$state.params.id)
+      $scope.description.input = ''
+  }
+
+  $scope.stopProp = function ($event) {
+    $event.stopPropagation()
   }
 
   $scope.sendToMarkerMap = function (city) {
