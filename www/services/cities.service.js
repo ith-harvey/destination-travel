@@ -11,18 +11,14 @@
       }
 
       citiesService.allCitiesByTrip = function (tripId) {
-        console.log('trip id --> ', tripId);
         return $http.get(`${BASE_URL}/cities/trips/${tripId}`)
       }
 
       citiesService.postMarker = function (tripId, data) {
-        console.log('post -->',data);
-        console.log('post -->',tripId);
         return $http.post(`${BASE_URL}/cities/trips/${tripId}`, data)
       }
 
       citiesService.delete = function (cityId) {
-        console.log(cityId);
         return $http.delete(`${BASE_URL}/cities/${cityId}`)
       }
   }

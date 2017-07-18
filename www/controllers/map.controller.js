@@ -16,6 +16,7 @@ angular.module('starter')
   $scope.markers = []
   $scope.alphabetArr = mapService.getAlphabetArr()
 
+  init()
 
   // declare modal
   $ionicModal.fromTemplateUrl('templates/marker-modal.html', function(modal) {
@@ -26,35 +27,36 @@ angular.module('starter')
     scope: $scope
   })
 
-  mapService.render('markerMap', 11, currCity)
+  function init () {
+    mapService.render('markerMap', 11, currCity)
 
-  // Once markers are retreived from device a new map is rendered
-  gMarkersService.allMarkersByCity(currCity.city_id).then(markers => {
+    // Once markers are retreived from device a new map is rendered
+    gMarkersService.allMarkersByCity(currCity.city_id).then(markers => {
 
-    // if markers exist, run code
-    if(markers.data.markers.length) {
-      let iconImage = {
-        url: 'img/Gold_star.png',
-        scaledSize: new google.maps.Size(20, 20),
-        origin: new google.maps.Point(0, 0),
-        anchor: new google.maps.Point(0, 32)
+      // if markers exist, run code
+      if(markers.data.markers.length) {
+        let iconImage = {
+          url: 'img/Gold_star.png',
+          scaledSize: new google.maps.Size(20, 20),
+          origin: new google.maps.Point(0, 0),
+          anchor: new google.maps.Point(0, 32)
+        }
+
+        //place markers on map
+        $scope.markers = markers.data.markers
+        mapService.placeMarkers(markers.data.markers, 'marker', iconImage)
+
+        $scope.markers = markers.data.markers.map( (value, index) => {
+          value.letter = $scope.alphabetArr[index] +'. '
+          return value
+        })
       }
-
-      //place markers on map
-      $scope.markers = markers.data.markers
-      mapService.placeMarkers(markers.data.markers, 'marker', iconImage)
-
-      $scope.markers = markers.data.markers.map( (value, index) => {
-        value.letter = $scope.alphabetArr[index] +'. '
-        return value
-      })
-    }
-  })
+    })
+  }
 
   $scope.$watch( function() {
     return mapDetailsService.fireSearchWithItemDetails()
   }, function(newVal, oldVal) {
-      console.log('running watch!',typeof newVal);
       if (typeof newVal === 'object') {
         $scope.searchMap(newVal.formatted_address)
       }
@@ -98,7 +100,7 @@ angular.module('starter')
   };
 
   $scope.saveLocation = function() {
-    mapService.saveLocation('marker', $scope.description.input, city_id)
+    mapService.saveLocation('marker', $scope.description.input, currCity.city_id)
   }
 
   $scope.stopProp = function ($event) {
@@ -116,6 +118,7 @@ angular.module('starter')
       $scope.markerListClass = 'list-half'
       $scope.searchBarClass = 'search-hide'
       $scope.markerAddDisplay = false
+      init()
     }
   }
 
@@ -126,6 +129,7 @@ angular.module('starter')
     // mapService.removeMarker()
     gMarkersService.delete(marker.id).then( response => {
       console.log(response);
+      init()
     })
 
   }

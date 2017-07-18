@@ -1,6 +1,6 @@
 
 
-angular.module('starter').controller('CitiesCtrl', function($scope, $state, citiesService, SessionsService, mapDetailsService, $ionicModal, mapService) {
+angular.module('starter').controller('CitiesCtrl', function($scope, $state, citiesService, SessionsService, mapDetailsService, $ionicModal, mapService, $timeout) {
 
   $scope.destinationDisplay = false
   $scope.cityAddDisplay = false
@@ -27,7 +27,6 @@ angular.module('starter').controller('CitiesCtrl', function($scope, $state, citi
   })
 
   function init () {
-    console.log('running init!');
     citiesService.all().then(cities => {
       $scope.cities = cities.data.trips
     })
@@ -50,7 +49,6 @@ angular.module('starter').controller('CitiesCtrl', function($scope, $state, citi
   $scope.$watch( function() {
     return mapDetailsService.fireSearchWithItemDetails()
   }, function(newVal, oldVal) {
-      console.log('running watch!',typeof newVal);
       if (typeof newVal === 'object') {
         $scope.searchMap(newVal.formatted_address)
       }
@@ -109,11 +107,10 @@ angular.module('starter').controller('CitiesCtrl', function($scope, $state, citi
   }
 
   $scope.sendToMarkerMap = function (city) {
-
     city = angular.toJson(city);
-    console.log('here is what we are passing-->', {city: city});
     $state.go('app.markerMap', {city: city})
   }
+
 
 
 })

@@ -9,7 +9,6 @@
 
   <ion-content>
 
-
     <div class="bar bar-header item-input-inset {{searchBarClass}}">
         <label class="item-input-wrapper">
             <i class="icon navicon ion-ios-search"></i>
@@ -36,15 +35,15 @@
 
     <div id="cityMap" class="{{cityMapClass}}" data-tap-disabled="true"></div>
 
-    <ion-scroll direction="y" class="{{cityListClass}}">
-      <ion-list>
-        <ion-item ng-repeat="city in cities">
-            {{city.letter}}{{city.city_name}}
-                <button  class="item-right button small_icon_button button-outline button-positive" ng-click="displayFire(city.city_place_id,city)"><i class="icon ion-ios-search ion-search"></i></button>
-                <button class="item-right button small_button button-outline button-positive" ng-click="sendToMarkerMap(city)">Marker Map</button>
-        </ion-item>
-      </ion-list>
-    </ion-scroll>
+      <ion-scroll style="height:35vh" direction="y" scrollbar-y="false">
+        <ion-list class="{{cityListClass}}">
+          <ion-item ng-repeat="city in cities">
+              {{city.letter}}{{city.city_name}}
+                  <button  class="item-right button small_icon_button button-outline button-positive" ng-click="displayFire(city.city_place_id,city)"><i class="icon ion-ios-search ion-search"></i></button>
+                  <button class="item-right button small_button button-outline button-positive" ng-click="sendToMarkerMap(city)">Marker Map</button>
+          </ion-item>
+        </ion-list>
+      </ion-scroll>
 
     <ion-footer-bar ng-show="!destinationDisplay&&footerActive&&cityAddDisplay" ng-click="displayFire(googDetails.place_id)" id="destinationFooterBar" align-title="left" class="bar-assertive">
       <h1 class="title">{{googDetails.name}}</h1>
