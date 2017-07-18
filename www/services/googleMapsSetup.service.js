@@ -22,18 +22,24 @@
 
 
       // initializes the map
-      mapService.render = function (mapid, zoom) {
+      mapService.render = function (mapid, zoom, city) {
+
+        function setLatLng(cityForLatLng) {
+          if (cityForLatLng) {
+            return ({lat: Number(cityForLatLng.city_lat),lng: Number(cityForLatLng.city_lng)})
+          }
+          return ({lat: 39.82,lng: -95.712})
+        }
+
         let mapOptions = {
-          center: ({
-            lat: 39.82,
-            lng: -95.712
-          }),
+          center: setLatLng(city),
           zoom: zoom,
           mapTypeId: google.maps.MapTypeId.ROADMAP,
           mapTypeControl: false
         };
 
         map = new google.maps.Map(document.getElementById(mapid), mapOptions);
+        
       }
 
 
@@ -57,8 +63,6 @@
         })
         map.fitBounds(bounds)
       }
-
-
 
 
       // takes address and fires updateMap with lat and lng
@@ -103,32 +107,47 @@
       mapService.saveLocation = function(resource, description, postToId ) {
 
         let details = mapDetailsService.getSearchItemDetails()
+        console.log('does place id exist?? ->', details);
         let lat = details.geometry.location.lat()
         let lng = details.geometry.location.lng()
 
         searchedMarker.pop().setMap(null)
+        searchedMarker.pop().setMap(null)
 
-        let image = {
-          url: 'img/Gold_star.png',
-          scaledSize: new google.maps.Size(20, 20),
-          origin: new google.maps.Point(0, 0),
-          anchor: new google.maps.Point(0, 32)
+        marker = function (resource) {
+          let image = {
+            url: 'img/Gold_star.png',
+            scaledSize: new google.maps.Size(20, 20),
+            origin: new google.maps.Point(0, 0),
+            anchor: new google.maps.Point(0, 32)
+          }
+
+          // if marker it gets a star
+          if(resource === 'marker') {
+            return new google.maps.Marker({
+              position: ({lat,lng}),
+              map: map,
+              icon: image
+            });
+          }
+          // if city it gets a basic marker
+          if(resource === 'city') {
+            return new google.maps.Marker({
+              position: ({lat,lng}),
+              map: map
+            });
+          }
         }
 
-        let marker = new google.maps.Marker({
-          position: ({lat,lng}),
-          map: map,
-          icon: image
-        });
-
         //pushing marker(gmaps formatted) into local array
-        starredMarkers.push(marker)
+        starredMarkers.push(marker(resource))
           let dbmarker = {}
 
           dbmarker[`${resource}_name`] = details.name,
           dbmarker[`${resource}_description`] = description,
           dbmarker[`${resource}_lat`] = lat.toString(),
           dbmarker[`${resource}_lng`] = lng.toString()
+          dbmarker[`${resource}_place_id`] = details.place_id
 
         if (resource === 'city') {
           citiesService.post(postToId,dbmarker).then(result => {

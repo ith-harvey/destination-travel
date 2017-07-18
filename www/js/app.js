@@ -67,7 +67,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'ngCordova'])
 
     .state('app.markerMap', {
       url: '/markermap',
-      params: { id: null },
+      params: { city: null },
       views: {
         'menuContent': {
           templateUrl: 'templates/markerMap.html',
@@ -90,7 +90,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'ngCordova'])
 
     .state('app.cities', {
       url: '/trip/:id/cities',
-      params: { id: null },
+      params: { city: null },
       views: {
         'menuContent': {
           templateUrl: 'templates/cities.html',
@@ -99,6 +99,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'ngCordova'])
       },
       requiresLogin: true
     });
+    
     // if none of the above states are matched, use this as the fallback
     $urlRouterProvider.otherwise('/app/home');
   });

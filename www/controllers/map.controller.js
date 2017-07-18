@@ -6,7 +6,7 @@ angular.module('starter')
   $scope.markerListClass = 'list-hide'
   $scope.searchBarClass = 'search-show'
 
-  const city_id = $state.params.id
+  const currCity = angular.fromJson($state.params.city)
   $scope.mapWatchService = mapService
   $scope.destinationDisplay = false
   $scope.footerActive = false
@@ -26,29 +26,29 @@ angular.module('starter')
     scope: $scope
   })
 
-  
-
-
-  mapService.render('markerMap', 2)
+  mapService.render('markerMap', 11, currCity)
 
   // Once markers are retreived from device a new map is rendered
-  gMarkersService.allMarkersByCity(city_id).then(markers => {
-    let iconImage = {
-      url: 'img/Gold_star.png',
-      scaledSize: new google.maps.Size(20, 20),
-      origin: new google.maps.Point(0, 0),
-      anchor: new google.maps.Point(0, 32)
+  gMarkersService.allMarkersByCity(currCity.city_id).then(markers => {
+
+    // if markers exist, run code
+    if(markers.data.markers.length) {
+      let iconImage = {
+        url: 'img/Gold_star.png',
+        scaledSize: new google.maps.Size(20, 20),
+        origin: new google.maps.Point(0, 0),
+        anchor: new google.maps.Point(0, 32)
+      }
+
+      //place markers on map
+      $scope.markers = markers.data.markers
+      mapService.placeMarkers(markers.data.markers, 'marker', iconImage)
+
+      $scope.markers = markers.data.markers.map( (value, index) => {
+        value.letter = $scope.alphabetArr[index] +'. '
+        return value
+      })
     }
-
-    //place markers on map
-    $scope.markers = markers.data.markers
-    mapService.placeMarkers(markers.data.markers, 'marker', iconImage)
-
-    $scope.markers = markers.data.markers.map( (value, index) => {
-      value.letter = $scope.alphabetArr[index] +'. '
-      return value
-    })
-
   })
 
   // Watches for fireSearchWithItemDetails to fire, once it does it checks for the object. If there is an object it runs search
@@ -119,7 +119,7 @@ angular.module('starter')
 
   $scope.deleteMarker = function (marker) {
     console.log('marker',marker);
-    $scope.markers.splice($scope.markers.indexOf(marker),1);
+    $scope.markers.splice($scope.markers.indexOf(marker),1)
     // mapService.removeMarker()
     gMarkersService.delete(marker.id).then( response => {
       console.log(response);

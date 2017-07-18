@@ -15,6 +15,8 @@ angular.module('starter').controller('CitiesCtrl', function($scope, $state, citi
   $scope.alphabetArr = mapService.getAlphabetArr()
 
 
+  init()
+
   // declare modal
   $ionicModal.fromTemplateUrl('templates/city-modal.html', function(modal) {
     $scope.modal = modal
@@ -24,23 +26,26 @@ angular.module('starter').controller('CitiesCtrl', function($scope, $state, citi
     scope: $scope
   })
 
-  citiesService.all().then(cities => {
-    $scope.cities = cities.data.trips
-  })
-
-  citiesService.allCitiesByTrip($state.params.id).then(cities => {
-
-    //render the map function profile = .render(mapId, mapZoom)
-    mapService.render("cityMap",2)
-
-    //set cities(for ng-list & google map)
-    mapService.placeMarkers(cities.data.cities,'city')
-
-    $scope.cities = cities.data.cities.map( (value, index) => {
-      value.letter = alphabetArr[index] +'. '
-      return value
+  function init () {
+    console.log('running init!');
+    citiesService.all().then(cities => {
+      $scope.cities = cities.data.trips
     })
-  })
+
+    citiesService.allCitiesByTrip($state.params.id).then(cities => {
+
+      //render the map function profile = .render(mapId, mapZoom)
+      mapService.render("cityMap",2)
+
+      //set cities(for ng-list & google map)
+      mapService.placeMarkers(cities.data.cities,'city')
+
+      $scope.cities = cities.data.cities.map( (value, index) => {
+        value.letter = alphabetArr[index] +'. '
+        return value
+      })
+    })
+  }
 
   $scope.searchMap = function(address) {
     mapService.search(address)
@@ -65,12 +70,12 @@ angular.module('starter').controller('CitiesCtrl', function($scope, $state, citi
     $scope.destinationDisplay ? $scope.destinationDisplay = false : $scope.destinationDisplay = true
   }
 
-
   $scope.deleteCity = function (city) {
     $scope.cities.splice($scope.cities.indexOf(city),1);
     // mapService.removeMarker()
     citiesService.delete(city.city_id).then( response => {
       console.log(response);
+      init()
     })
   }
 
@@ -85,12 +90,20 @@ angular.module('starter').controller('CitiesCtrl', function($scope, $state, citi
       $scope.cityListClass = 'list-half'
       $scope.searchBarClass = 'search-hide'
       $scope.cityAddDisplay = false
+      init()
     }
   }
 
   $scope.saveCityLocation = function () {
 
       mapService.saveLocation('city',$scope.description.input,$state.params.id)
+  }
+
+  $scope.sendToMarkerMap = function (city) {
+
+    city = angular.toJson(city);
+    console.log('here is what we are passing-->', {city: city});
+    $state.go('app.markerMap', {city: city})
   }
 
 
