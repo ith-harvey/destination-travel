@@ -1,16 +1,29 @@
 
 
-angular.module('starter').controller('CitiesCtrl', function($scope, $state, citiesService, SessionsService, mapService) {
+angular.module('starter').controller('CitiesCtrl', function($scope, $state, citiesService, SessionsService, mapDetailsService, $ionicModal, mapService) {
 
   $scope.destinationDisplay = false
   $scope.cityAddDisplay = false
   const alphabetArr = mapService.getAlphabetArr()
   $scope.cities = [];
+  $scope.footerActive = false
   $scope.cityMapClass = 'map-half'
   $scope.cityListClass = 'list-half'
   $scope.searchBarClass = 'search-hide'
   $scope.destinationDisplayCity = {}
   $scope.alphabetArr = mapService.getAlphabetArr()
+
+
+  // declare modal
+  $ionicModal.fromTemplateUrl('templates/city-modal.html', function(modal) {
+    $scope.modal = modal
+  }, {
+    animation: 'slide-in-up',
+    focusFirstInput: true,
+    scope: $scope
+  })
+
+
 
   citiesService.all().then(cities => {
     $scope.cities = cities.data.trips
@@ -36,22 +49,25 @@ angular.module('starter').controller('CitiesCtrl', function($scope, $state, citi
   $scope.searchMap = function(address) {
     mapService.search(address)
     $scope.footerActive = true
-    $scope.changeMapClass()
-  }
-
-  $scope.changeMapClass = function () {
+    $scope.cityMapClass = 'map-with-destination'
+    $scope.details = mapDetailsService.getSearchItemDetails()
 
   }
 
   $scope.displayFire = function (city) {
-    $scope.destinationDisplayCity.destinationCitydbResponse = city
-
-    mapService.getPlaceInfo(city.city_place_id, function (place,status) {
+    let city_id
+    if (city.city_place_id) {
+      city_id = city.city_place_id
+    } else {
+      city_id = city.place_id
+    }
+    mapService.getPlaceInfo(city_id, function (place,status) {
       $scope.$apply(function () {
+        $scope.details = place
         $scope.destinationDisplayCity.googCityResponse = place
+        $scope.destinationDisplayCity.destinationCitydbResponse = city
       })
     })
-
     $scope.destinationDisplay ? $scope.destinationDisplay = false : $scope.destinationDisplay = true
   }
 

@@ -18,7 +18,7 @@ angular.module('starter')
 
 
   // declare modal
-  $ionicModal.fromTemplateUrl('templates/description-modal.html', function(modal) {
+  $ionicModal.fromTemplateUrl('templates/marker-modal.html', function(modal) {
     $scope.modal = modal
   }, {
     animation: 'slide-in-up',
