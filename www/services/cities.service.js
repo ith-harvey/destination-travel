@@ -1,6 +1,5 @@
 (function() {
-  angular.module('starter')
-    .service('citiesService', service)
+  angular.module('starter').service('citiesService', service)
 
     service.$inject = ['BASE_URL', '$http']
 
@@ -16,7 +15,7 @@
         return $http.get(`${BASE_URL}/cities/trips/${tripId}`)
       }
 
-      citiesService.post = function (tripId, data) {
+      citiesService.postMarker = function (tripId, data) {
         console.log('post -->',data);
         console.log('post -->',tripId);
         return $http.post(`${BASE_URL}/cities/trips/${tripId}`, data)

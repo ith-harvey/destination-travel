@@ -39,7 +39,7 @@
         };
 
         map = new google.maps.Map(document.getElementById(mapid), mapOptions);
-        
+
       }
 
 
@@ -104,14 +104,13 @@
       }
 
 
+      // Watches for fireSearchWithItemDetails to fire, once it does it checks for the object. If there is an object it runs search
       mapService.saveLocation = function(resource, description, postToId ) {
 
         let details = mapDetailsService.getSearchItemDetails()
-        console.log('does place id exist?? ->', details);
         let lat = details.geometry.location.lat()
         let lng = details.geometry.location.lng()
 
-        searchedMarker.pop().setMap(null)
         searchedMarker.pop().setMap(null)
 
         marker = function (resource) {
@@ -142,7 +141,6 @@
         //pushing marker(gmaps formatted) into local array
         starredMarkers.push(marker(resource))
           let dbmarker = {}
-
           dbmarker[`${resource}_name`] = details.name,
           dbmarker[`${resource}_description`] = description,
           dbmarker[`${resource}_lat`] = lat.toString(),
@@ -150,7 +148,9 @@
           dbmarker[`${resource}_place_id`] = details.place_id
 
         if (resource === 'city') {
-          citiesService.post(postToId,dbmarker).then(result => {
+          console.log('postToId', postToId);
+          console.log('dbmarker', dbmarker);
+          citiesService.postMarker(postToId,dbmarker).then(result => {
             console.log('result from cities Service', result);
           })
         }

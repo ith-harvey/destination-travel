@@ -47,6 +47,15 @@ angular.module('starter').controller('CitiesCtrl', function($scope, $state, citi
     })
   }
 
+  $scope.$watch( function() {
+    return mapDetailsService.fireSearchWithItemDetails()
+  }, function(newVal, oldVal) {
+      console.log('running watch!',typeof newVal);
+      if (typeof newVal === 'object') {
+        $scope.searchMap(newVal.formatted_address)
+      }
+    }, true)
+
   $scope.searchMap = function(address) {
     mapService.search(address)
     $scope.footerActive = true

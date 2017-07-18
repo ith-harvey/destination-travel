@@ -51,12 +51,15 @@ angular.module('starter')
     }
   })
 
-  // Watches for fireSearchWithItemDetails to fire, once it does it checks for the object. If there is an object it runs search
-  $scope.$watch('mapWatchService.fireSearchWithItemDetails()', newVal => {
-    if (typeof newVal === 'object') {
-      mapService.search(newVal.formatted_address)
-    }
-  })
+  $scope.$watch( function() {
+    return mapDetailsService.fireSearchWithItemDetails()
+  }, function(newVal, oldVal) {
+      console.log('running watch!',typeof newVal);
+      if (typeof newVal === 'object') {
+        $scope.searchMap(newVal.formatted_address)
+      }
+    }, true)
+
 
   // retreives lat lng using googles geocode
   $scope.searchMap = function(address) {
