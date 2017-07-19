@@ -1,0 +1,25 @@
+<ion-modal-view>
+
+    <ion-header-bar>
+      <h1 class="title">Save destination</h1>
+      <div class="buttons">
+        <button class="button button-outline button-positive" ng-click="modal.hide()">Cancel</button>
+      </div>
+    </ion-header-bar>
+
+    <ion-content>
+      <h2>Create a trip</h2>
+      <label class="item item-input item-stacked-label">
+        <span class="input-label">Trip name: </span>
+        <input type="text" select-all-in-input ng-model="tripInput.name" placeholder="ex. Southern Europe and Western Asia">
+        </input>
+      </label>
+      <label class="item item-input item-stacked-label">
+        <span class="input-label">Trip description: </span>
+        <textarea class="text-area" select-all-in-input ng-model="tripInput.description" placeholder="add some notes for yourself, friends and family!">
+        </textarea>
+      </label>
+      <button type="submit" ng-click="createTrip(); modal.hide()" class="button button-positive">Save location</button>
+    </ion-content>
+
+</ion-modal-view>

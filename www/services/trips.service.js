@@ -19,5 +19,10 @@
       tripsService.show = function (id) {
         return $http.get(`${BASE_URL}/trips/${id}`)
       }
+
+      tripsService.post = function (object,userId) {
+        console.log('in post');
+        return $http.post(`${BASE_URL}/trips`, object)
+      }
   }
 }());
