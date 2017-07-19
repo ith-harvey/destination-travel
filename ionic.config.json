@@ -1,6 +1,6 @@
 {
   "name": "travel-share",
-  "app_id": "",
+  "app_id": "095dc348",
   "type": "ionic1",
   "watchPatterns": [
     "scss/**/*"

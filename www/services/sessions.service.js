@@ -26,7 +26,6 @@
 
     sessionService.logout = function () {
       sessionService.user = {}
-
       return $http.delete(`${BASE_URL}/sessions`)
     }
   }
