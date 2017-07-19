@@ -37,7 +37,13 @@ angular.module('starter')
     })
   }
 
-
+  $scope.deleteTrip = function (trip) {
+    console.log('trip -->',trip);
+    $scope.trips.splice($scope.trips.indexOf(trip),1)
+    tripsService.deleteTrip(trip.id).then(response => {
+      console.log('response form delete',response);
+    })
+  }
 
   function init() {
     tripsService.individualUser(SessionsService.user.id).then(trips => {

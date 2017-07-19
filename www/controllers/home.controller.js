@@ -1,6 +1,7 @@
 
-angular.module('starter').controller('home', function($scope, tripsService, $ionicModal, SessionsService) {
+angular.module('starter').controller('home', function($scope, tripsService, $ionicModal, SessionsService, mapService) {
   $scope.tripInput = {}
+  $scope.cityInput = {}
 
   $ionicModal.fromTemplateUrl('templates/trip-modal.html', function(modal) {
     $scope.modal = modal
@@ -12,16 +13,22 @@ angular.module('starter').controller('home', function($scope, tripsService, $ion
 
 /// USER NEEDS TO BE LOGGED IN!
 
-  $scope.createTrip = function () {
-    console.log('session service!', SessionsService.user);
-    let tripObj = {
-      trip_name: $scope.tripInput.name,
-      trip_description: $scope.tripInput.description,
-      user_id: SessionsService.user.id
-    }
-    console.log('this is the trip!',tripObj);
+$scope.createTrip = function () {
 
-    tripsService.post(tripObj,SessionsService.user.id)
+  let tripObj = {
+    trip_name: $scope.tripInput.name,
+    trip_description: $scope.tripInput.description,
+    user_id: SessionsService.user.id
   }
+
+  //post to trip
+  tripsService.post(tripObj,SessionsService.user.id).then( response => {
+
+    //post first city to trip with new trip id
+    mapService.saveLocation('city',$scope.cityInput.description,response.data.trips[0].id)
+      $scope.tripInput = {}
+      $scope.cityInput = {}
+  })
+}
 
 })

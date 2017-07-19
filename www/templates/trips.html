@@ -2,8 +2,10 @@
   <ion-content>
 
     <ion-list>
-      <ion-item ng-repeat="trip in trips" href="#/app/trips/{{trip.id}}" ui-sref="app.cities({id: trip.id})">
+      <ion-item ng-repeat="trip in trips" href="#/app/trips/{{trip.id}}">
         {{trip.trip_name}}
+          <button class="item-right button small_button button-outline button-positive" ng-click="deleteTrip(trip)">delete</button>
+          <button class="item-right button small_button button-outline button-positive" ui-sref="app.cities({id: trip.id})">City Map</button>
       </ion-item>
     </ion-list>
 

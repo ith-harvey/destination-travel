@@ -61,9 +61,9 @@
           bounds.extend(latlng);
           savedMarkersArr.push(marker)
         })
+
         map.fitBounds(bounds)
       }
-
 
       // takes address and fires updateMap with lat and lng
       mapService.search = function (address) {
@@ -111,7 +111,10 @@
         let lat = details.geometry.location.lat()
         let lng = details.geometry.location.lng()
 
-        if (searchedMarker.length) { searchedMarker.pop().setMap(null)}
+          while(searchedMarker.length) {
+            searchedMarker.pop().setMap(null)
+          }
+
 
         marker = function (resource) {
           let image = {
@@ -148,8 +151,6 @@
           dbmarker[`${resource}_place_id`] = details.place_id
 
         if (resource === 'city') {
-          console.log('postToId', postToId);
-          console.log('dbmarker', dbmarker);
           citiesService.postMarker(postToId,dbmarker).then(result => {
             console.log('result from cities Service', result);
           })

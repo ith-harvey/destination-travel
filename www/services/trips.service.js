@@ -24,5 +24,10 @@
         console.log('in post');
         return $http.post(`${BASE_URL}/trips`, object)
       }
+
+      tripsService.deleteTrip = function (tripId) {
+        console.log('in delete');
+        return $http.delete(`${BASE_URL}/trips/${tripId}`)
+      }
   }
 }());
