@@ -1,11 +1,15 @@
 <ion-view view-title="Cities">
 
   <ion-nav-bar>
-    <ion-nav-buttons side="right">
-            <i ng-hide="cityAddDisplay" ng-click="cityChangeDisplay()" class="ion-ios-plus-outline navicon"></i>
-            <i ng-show="cityAddDisplay" ng-click="cityChangeDisplay()" class="ion-navicon-round navicon"></i>
+    <ion-nav-buttons side="left">
+      <a ng-click="goBackState()" class="button button-icon icon ion-ios-arrow-back"></a>
     </ion-nav-buttons>
-    </ion-nav-bar>
+    <ion-nav-buttons side="right">
+      <i ng-hide="cityAddDisplay" ng-click="cityChangeDisplay()" class="ion-ios-plus-outline navicon"></i>
+      <i ng-show="cityAddDisplay" ng-click="cityChangeDisplay()" class="ion-navicon-round navicon"></i>
+    </ion-nav-buttons>
+
+  </ion-nav-bar>
 
   <ion-content>
 

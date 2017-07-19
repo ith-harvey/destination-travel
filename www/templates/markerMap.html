@@ -1,6 +1,9 @@
 <ion-view view-title="Locations">
 
   <ion-nav-bar>
+    <ion-nav-buttons side="left">
+      <a ng-click="goBackState()" class="button button-icon icon ion-ios-arrow-back"></a>
+    </ion-nav-buttons>
     <ion-nav-buttons side="right">
             <i ng-hide="markerAddDisplay" ng-click="markerChangeDisplay()" class="ion-ios-plus-outline navicon"></i>
             <i ng-show="markerAddDisplay" ng-click="markerChangeDisplay()" class="ion-navicon-round navicon"></i>
