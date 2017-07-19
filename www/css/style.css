@@ -17,6 +17,10 @@ html {
   font-size: 2rem;
 }
 
+.ng-list-float-right {
+  text-align: right
+}
+
 .pac-container {
   z-index: 3000 !important;
 }

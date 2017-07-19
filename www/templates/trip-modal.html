@@ -19,6 +19,13 @@
         <textarea class="text-area" select-all-in-input ng-model="tripInput.description" placeholder="add some notes for yourself, friends and family!">
         </textarea>
       </label>
+
+        <label class="item item-input item-stacked-label">
+          <span class="input-label">Starting city: </span>
+          <i class="icon ion-ios-search placeholder-icon"></i>
+          <input type="text" ng-autocomplete ng-disabletap select-all-in-input ng-onenter="" ng-model="result.location" placeholder="city where your trip begins">
+        </label>
+
       <button type="submit" ng-click="createTrip(); modal.hide()" class="button button-positive">Save location</button>
     </ion-content>
 

@@ -1,9 +1,16 @@
 <ion-view view-title="Trips">
   <ion-content>
+
     <ion-list>
       <ion-item ng-repeat="trip in trips" href="#/app/trips/{{trip.id}}" ui-sref="app.cities({id: trip.id})">
         {{trip.trip_name}}
       </ion-item>
     </ion-list>
+
+    <ion-item ng-click="modal.show()" class="ng-list-float-right" style="display: -webkit-box;">
+      <i" ion-ios-plus-outline navicon"></i>
+      <p class="ng-list-float-right">Create a new trip</p>
+    </ion-item>
+
   </ion-content>
 </ion-view>

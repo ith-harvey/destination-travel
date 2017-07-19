@@ -111,7 +111,7 @@
         let lat = details.geometry.location.lat()
         let lng = details.geometry.location.lng()
 
-        searchedMarker.pop().setMap(null)
+        if (searchedMarker.length) { searchedMarker.pop().setMap(null)}
 
         marker = function (resource) {
           let image = {

@@ -62,7 +62,8 @@ angular.module('starter', ['ionic', 'starter.controllers', 'ngCordova'])
           templateUrl: 'templates/home.html',
           controller: 'home'
         }
-      }
+      },
+      requiresLogin: true
     })
 
     .state('app.markerMap', {
@@ -99,7 +100,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'ngCordova'])
       },
       requiresLogin: true
     });
-    
+
     // if none of the above states are matched, use this as the fallback
     $urlRouterProvider.otherwise('/app/home');
   });
