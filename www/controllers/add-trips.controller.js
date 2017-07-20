@@ -2,12 +2,10 @@
 
 angular.module('starter')
 
-.controller('TripsCtrl', function($scope, tripsService, SessionsService, $ionicModal, mapService, loginService) {
+.controller('AddTripsCtrl', function($scope, tripsService, SessionsService, $ionicModal, mapService, loginService, $state) {
   $scope.trips = [];
   $scope.tripInput = {}
   $scope.cityInput = {}
-
-  init()
 
   // initialize modal
 
@@ -29,23 +27,7 @@ angular.module('starter')
       mapService.saveLocation('city',$scope.cityInput.description,response.data.trips[0].id)
         $scope.tripInput = {}
         $scope.cityInput = {}
-        init()
-    })
-  }
-
-  $scope.deleteTrip = function (trip) {
-    console.log('trip -->',trip);
-    $scope.trips.splice($scope.trips.indexOf(trip),1)
-    tripsService.deleteTrip(trip.id).then(response => {
-      console.log('response form delete',response);
-    })
-  }
-
-// loginService.getUser()
-  function init() {
-    tripsService.individualUser().then(trips => {
-      $scope.trips = trips.data.trips
-
+        $state.go('app.trips')
     })
   }
 

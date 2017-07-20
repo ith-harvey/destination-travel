@@ -19,12 +19,10 @@ angular.module('starter').service('loginService', loginService)
     // }
 
     vm.signUp = function(user) {
-      console.log('in signup');
       return $http.post(`${BASE_URL}/users/signup`, user)
     }
 
     vm.login = function(user) {
-      console.log('user-->',user);
       return $http.post(`${BASE_URL}/jwebt/login`, user)
     }
 
@@ -42,7 +40,6 @@ angular.module('starter').service('loginService', loginService)
     }
 
     vm.useCredentials = function (token) {
-      console.log('this is the token',token);
       isAuthenticated = true
       authToken = token
 

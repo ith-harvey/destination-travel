@@ -88,6 +88,17 @@ angular.module('starter', ['ionic', 'starter.controllers', 'ngCordova'])
         requiresLogin: true
       })
 
+      .state('app.addtrips', {
+        url: '/addtrips',
+        views: {
+          'menuContent': {
+            templateUrl: 'templates/add-trip.html',
+            controller: 'AddTripsCtrl'
+          }
+        },
+        requiresLogin: true
+      })
+
     .state('app.cities', {
       url: '/trip/:id/cities',
       params: { city: null },

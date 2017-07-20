@@ -1,9 +1,10 @@
 angular.module('starter.controllers',['ngCordovaOauth', 'ngAutocomplete', 'ngDisabletap', 'ngOnenter', 'selectAllInInput'])
 
-.controller('AppCtrl', function($scope, $ionicModal, $timeout, $cordovaOauth,loginService) {
+.controller('AppCtrl', function($scope, $ionicModal, $timeout, $cordovaOauth,loginService, $state) {
 
   $scope.logOut = function () {
     loginService.logout()
+    $state.go('login')
   }
   // With the new view caching in Ionic, Controllers are only called
   // when they are recreated or on app start, instead of every page change.

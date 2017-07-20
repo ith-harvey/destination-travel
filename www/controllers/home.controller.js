@@ -3,14 +3,6 @@ angular.module('starter').controller('home', function($scope, tripsService, $ion
   $scope.tripInput = {}
   $scope.cityInput = {}
 
-  $ionicModal.fromTemplateUrl('templates/trip-modal.html', function(modal) {
-    $scope.modal = modal
-  }, {
-    animation: 'slide-in-up',
-    focusFirstInput: true,
-    scope: $scope
-  })
-
 /// USER NEEDS TO BE LOGGED IN!
 
 $scope.createTrip = function () {

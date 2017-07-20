@@ -21,7 +21,7 @@ html {
   text-align: right
 }
 
-.pac-container {
+.pac-item {
   z-index: 3000 !important;
 }
 
