@@ -10,6 +10,7 @@ angular.module('starter').service('loginService', loginService)
     let currUserId
 
 
+
     // vm.facebookLogin = function () {
     //   // return $auth.authenticate('facebook')
     //   // const rootURL = 'http://localhost:3000'
@@ -41,8 +42,13 @@ angular.module('starter').service('loginService', loginService)
     }
 
     vm.useCredentials = function (token) {
+      console.log('this is the token',token);
       isAuthenticated = true
       authToken = token
+
+      // sets token as the header of all requests
+      // $http.defaults.headers.common.Authorization = 'Bearer: ' + authToken
+
       $http.defaults.headers.common.Authorization = authToken
       return isAuthenticated
     }

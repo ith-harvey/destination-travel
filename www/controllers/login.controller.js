@@ -7,6 +7,7 @@ angular.module('starter')
   $scope.login = function () {
     loginService.login($scope.user).then(result => {
       console.log(result.data);
+      loginService.saveUser(result.data.user_id)
       loginService.store(result.data.token)
       $state.go('app.home')
     })

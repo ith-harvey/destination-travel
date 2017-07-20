@@ -11,17 +11,15 @@
         return $http.get(`${BASE_URL}/trips/`)
       }
 
-      tripsService.individualUser = function (userId) {
-        console.log('user id --> ', userId);
-        return $http.get(`${BASE_URL}/trips/users/${userId}`)
+      tripsService.individualUser = function () {
+        return $http.get(`${BASE_URL}/trips/users`)
       }
 
       tripsService.show = function (id) {
         return $http.get(`${BASE_URL}/trips/${id}`)
       }
 
-      tripsService.post = function (object,userId) {
-        console.log('in post');
+      tripsService.post = function (object) {
         return $http.post(`${BASE_URL}/trips`, object)
       }
 
