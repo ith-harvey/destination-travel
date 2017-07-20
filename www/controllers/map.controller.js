@@ -36,7 +36,7 @@ angular.module('starter')
       // if markers exist, run code
       if(markers.data.markers.length) {
         let iconImage = {
-          url: 'img/Gold_star.png',
+          url: 'img/Gold_Star.png',
           scaledSize: new google.maps.Size(20, 20),
           origin: new google.maps.Point(0, 0),
           anchor: new google.maps.Point(0, 32)
