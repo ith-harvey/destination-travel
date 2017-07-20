@@ -44,7 +44,7 @@
           <ion-item ng-repeat="city in cities">
               {{city.letter}}{{city.city_name}}
                   <button  class="item-right button small_icon_button button-outline button-positive" ng-click="displayFire(city.city_place_id,city)"><i class="icon ion-ios-search ion-search"></i></button>
-                  <button class="item-right button small_button button-outline button-positive" ng-click="sendToMarkerMap(city)">Marker Map</button>
+                  <button ng-click="sendToMarkerMap(city)" class="item-right button small_button button-outline button-positive"><i class="ion-map navicon"></i></button>
           </ion-item>
         </ion-list>
       </ion-scroll>
