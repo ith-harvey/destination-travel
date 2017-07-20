@@ -1,9 +1,9 @@
 (function() {
   angular.module('starter').run(run)
 
-  run.$inject = ['$rootScope', '$state', 'SessionsService', '$ionicViewSwitcher','$ionicHistory' ]
+  run.$inject = ['$rootScope', '$state', 'SessionsService', '$ionicViewSwitcher','$ionicHistory', 'loginService' ]
 
-  function run ($rootScope, $state, SessionsService, $ionicViewSwitcher, $ionicHistory) {
+  function run ($rootScope, $state, SessionsService, $ionicViewSwitcher, $ionicHistory, loginService) {
 
     $rootScope.goBackState = function() {
       $ionicViewSwitcher.nextDirection('back');
@@ -11,21 +11,13 @@
     }
 
     $rootScope.$on('$stateChangeStart', function (evt, toState, toParams, fromState, fromParams) {
-      var user = SessionsService.user
 
-      SessionsService.refresh()
-
-
-
-      if (toState.requiresLogin && !user.id) {
+      if (!loginService.loadUserCredentials() && toState.requiresLogin) {
+        console.log('no credentials!');
         var notification = 'You cannot access that page without logging in.'
-        evt.preventDefault()
-        return $state.go('login', { notification: notification });
+        event.preventDefault();
+        return $state.go('login');
       }
-
-      // if (toState.name === 'app.cities' ) {
-      //
-      // }
 
     });
   }

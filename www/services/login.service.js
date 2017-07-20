@@ -4,6 +4,11 @@ angular.module('starter').service('loginService', loginService)
 
   function loginService($http, BASE_URL) {
     const vm = this
+    const tokenKey = 'Bee-RR-Tolken'
+    let isAuthenticated = false
+    let authToken
+    let currUserId
+
 
     // vm.facebookLogin = function () {
     //   // return $auth.authenticate('facebook')
@@ -12,16 +17,54 @@ angular.module('starter').service('loginService', loginService)
     //   return $http.get(url)
     // }
 
-    vm.attemptLogin = function (id) {
-      const url = `${BASE_URL}/users/${id}`
-      return $http.get(url)
+    vm.signUp = function(user) {
+      console.log('in signup');
+      return $http.post(`${BASE_URL}/users/signup`, user)
     }
 
-    vm.createSession = function (email, password) {
-      console.log('in create Session');
-      const url = `${BASE_URL}/sessions/`
-      const data = { email, password }
-      return $http.post(url, data)
+    vm.login = function(user) {
+      console.log('user-->',user);
+      return $http.post(`${BASE_URL}/jwebt/login`, user)
     }
+
+    vm.logout = function () {
+      console.log('logging out');
+      authToken = undefined
+      isAuthenticated = false
+      $http.defaults.headers.common.Authorization = undefined
+      window.localStorage.removeItem(tokenKey)
+    }
+
+    vm.store = function (token) {
+      window.localStorage.setItem(tokenKey, token)
+      vm.useCredentials(token)
+    }
+
+    vm.useCredentials = function (token) {
+      isAuthenticated = true
+      authToken = token
+      $http.defaults.headers.common.Authorization = authToken
+      return isAuthenticated
+    }
+
+    vm.loadUserCredentials = function () {
+      let token = window.localStorage.getItem(tokenKey)
+      if (token) {
+        vm.useCredentials(token)
+      } else {
+        isAuthenticated = false
+      }
+      return isAuthenticated
+    }
+
+    vm.saveUser = function (id) {
+      currUserId = id
+    }
+
+    vm.getUser = function () {
+      return currUserId
+    }
+
+    vm.loadUserCredentials()
 
   }
