@@ -15,8 +15,8 @@
       if (!loginService.loadUserCredentials() && toState.requiresLogin) {
         console.log('no credentials!');
         var notification = 'You cannot access that page without logging in.'
-        event.preventDefault();
-        return $state.go('login');
+        // event.preventDefault();
+        $state.go('login');
       }
 
     });
