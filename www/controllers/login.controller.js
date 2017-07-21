@@ -1,6 +1,6 @@
 angular.module('starter')
 
-.controller('loginCtrl', function($scope, $state, $ionicModal, $timeout, $cordovaOauth,loginService) {
+.controller('loginCtrl', function($scope, $state, $ionicModal, $timeout, $cordovaOauth,loginService, facebookSearchService) {
 
   $scope.user = {};
   let fbaccess_token
@@ -16,12 +16,12 @@ angular.module('starter')
   }
 
   $scope.fbLogin = function() {
-    console.log('hitting it fb');
         $cordovaOauth.facebook("1981517632083291", ["email","user_relationships", "user_about_me"]).then(function(result) {
+          facebookSearchService.storeFbAccToken(result)
           console.log('here is our token -->',result.access_token)
-            loginService.fbLogin(result).then(result => {
-              console.log('result from our servers FB login -->', result.data.token);
-              loginService.store(result.data.token)
+            loginService.fbLogin(result).then(resultFromDb => {
+              console.log('result from our servers FB login -->', resultFromDb.data.token);
+              loginService.store(resultFromDb.data.token)
               $state.go('app.home')
 
             })

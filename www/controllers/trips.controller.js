@@ -26,10 +26,12 @@ angular.module('starter')
     tripsService.post(tripObj).then( response => {
 
       //post first city to trip with new trip id
-      mapService.saveLocation('city',$scope.cityInput.description,response.data.trips[0].id)
+      mapService.saveLocation('city',$scope.cityInput.description,response.data.trips[0].id).then(result => {
+        console.log('final retun of zi promises -->', result);
         $scope.tripInput = {}
         $scope.cityInput = {}
         init()
+      })
     })
   }
 
@@ -41,7 +43,7 @@ angular.module('starter')
     })
   }
 
-// loginService.getUser()
+
   function init() {
     tripsService.individualUser().then(trips => {
       $scope.trips = trips.data.trips

@@ -45,6 +45,9 @@
 
       // Places markers on the current map
       mapService.placeMarkers = function (locationsArr,locScope, iconImage) {
+        while(savedMarkersArr.length) {
+          savedMarkersArr.pop().setMap(null)
+        }
         let bounds = new google.maps.LatLngBounds();
 
         locationsArr.forEach( (location, index) => {
@@ -61,12 +64,21 @@
           bounds.extend(latlng);
           savedMarkersArr.push(marker)
         })
-
-        map.fitBounds(bounds)
+        // if there is only one city on the map or one marker set the zoom to 7
+        if (locationsArr.length === 1) {
+          let latLng = {}
+          latLng.lat = savedMarkersArr[0].position.lat()
+          latLng.lng = savedMarkersArr[0].position.lng()
+          map.setCenter(latLng)
+          map.setZoom(7)
+        } else {
+          map.fitBounds(bounds)
+        }
       }
 
       // takes address and fires updateMap with lat and lng
       mapService.search = function (address) {
+        console.log('in search here is what is getting searched-->', address);
         geocoder.geocode({'address': address}, function(results, status) {
           if (status === 'OK') {
             let latlng = {
@@ -151,9 +163,7 @@
           dbmarker[`${resource}_place_id`] = details.place_id
 
         if (resource === 'city') {
-          citiesService.postMarker(postToId,dbmarker).then(result => {
-            console.log('result from cities Service', result);
-          })
+          return citiesService.postMarker(postToId,dbmarker)
         }
 
         if (resource === 'marker') {

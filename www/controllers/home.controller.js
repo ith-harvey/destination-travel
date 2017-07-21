@@ -15,12 +15,12 @@ $scope.createTrip = function () {
 
   //post to trip
   tripsService.post(tripObj,SessionsService.user.id).then( response => {
-
     //post first city to trip with new trip id
     mapService.saveLocation('city',$scope.cityInput.description,response.data.trips[0].id)
       $scope.tripInput = {}
       $scope.cityInput = {}
   })
 }
+
 
 })

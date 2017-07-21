@@ -23,6 +23,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'ngCordova'])
   })
 
   .config(function($stateProvider, $urlRouterProvider, $httpProvider) {
+
     $stateProvider
       .state('app', {
       url: '/app',
@@ -76,27 +77,38 @@ angular.module('starter', ['ionic', 'starter.controllers', 'ngCordova'])
       requiresLogin: true
     })
 
-      .state('app.trips', {
-        url: '/trips',
-        views: {
-          'menuContent': {
-            templateUrl: 'templates/trips.html',
-            controller: 'TripsCtrl'
-          }
-        },
-        requiresLogin: true
-      })
+    .state('app.trips', {
+      url: '/trips',
+      views: {
+        'menuContent': {
+          templateUrl: 'templates/trips.html',
+          controller: 'TripsCtrl'
+        }
+      },
+      requiresLogin: true
+    })
 
-      .state('app.addtrips', {
-        url: '/addtrips',
-        views: {
-          'menuContent': {
-            templateUrl: 'templates/add-trip.html',
-            controller: 'AddTripsCtrl'
-          }
-        },
-        requiresLogin: true
-      })
+    .state('app.addtrips', {
+      url: '/addtrips',
+      views: {
+        'menuContent': {
+          templateUrl: 'templates/add-trip.html',
+          controller: 'AddTripsCtrl'
+        }
+      },
+      requiresLogin: true
+    })
+
+    .state('app.fbfriendscities', {
+      url: '/fbFriendsCities',
+      views: {
+        'menuContent': {
+          templateUrl: 'templates/fb-friends-cities.html',
+          controller: 'fbFriendsCitiesCtrl'
+        }
+      },
+      requiresLogin: true
+    })
 
     .state('app.cities', {
       url: '/trip/:id/cities',

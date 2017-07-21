@@ -10,14 +10,6 @@ angular.module('starter').service('loginService', loginService)
     let currUserId
 
 
-
-    // vm.facebookLogin = function () {
-    //   // return $auth.authenticate('facebook')
-    //   // const rootURL = 'http://localhost:3000'
-    //   // const url = `${rootURL}/users/auth/facebook`
-    //   return $http.get(url)
-    // }
-
     vm.signUp = function(user) {
       return $http.post(`${BASE_URL}/users/signup`, user)
     }
@@ -26,12 +18,7 @@ angular.module('starter').service('loginService', loginService)
       return $http.post(`${BASE_URL}/jwebt/login`, user)
     }
 
-    vm.fbLogin = function(fbtoken) {
-      return $http.post(`${BASE_URL}/jwebt/fblogin`, fbtoken)
-    }
-
     vm.logout = function () {
-      console.log('logging out');
       authToken = undefined
       isAuthenticated = false
       $http.defaults.headers.common.Authorization = undefined
@@ -64,12 +51,9 @@ angular.module('starter').service('loginService', loginService)
       return isAuthenticated
     }
 
-    vm.saveUser = function (id) {
-      currUserId = id
-    }
-
-    vm.getUser = function () {
-      return currUserId
+    ////// facebook related functions //////
+    vm.fbLogin = function(fbtoken) {
+      return $http.post(`${BASE_URL}/jwebt/fblogin`, fbtoken)
     }
 
     vm.loadUserCredentials()

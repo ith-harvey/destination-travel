@@ -92,6 +92,7 @@ angular.module('starter').controller('CitiesCtrl', function($scope, $state, citi
       $scope.cityListClass = 'list-hide'
       $scope.searchBarClass = 'search-show'
       $scope.cityAddDisplay = true
+      $scope.footerActive = false
     } else {
       $scope.cityMapClass = 'map-half'
       $scope.cityListClass = 'list-half'
