@@ -26,6 +26,10 @@ angular.module('starter').service('loginService', loginService)
       return $http.post(`${BASE_URL}/jwebt/login`, user)
     }
 
+    vm.fbLogin = function(fbtoken) {
+      return $http.post(`${BASE_URL}/jwebt/fblogin`, fbtoken)
+    }
+
     vm.logout = function () {
       console.log('logging out');
       authToken = undefined

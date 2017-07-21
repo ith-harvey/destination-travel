@@ -8,18 +8,17 @@
     </div>
 
     <form ng-submit="login()">
-    <label class="item item-input">
-      <span class="input-label">Username</span>
-      <input type="text" ng-model="user.email">
-    </label>
-    <label class="item item-input">
-      <span class="input-label">Password</span>
-      <input type="password" ng-model="user.password">
-    </label>
-    <button class="button button-block button-positive" type="submit">Log in</button>
-    <button ng-click="facebookLogin()"class='button button-block button-positive'>Log in with facebook</button>
-    <a ui-sref="signUp" class="button button-calm button-block button-outline">Don't have an account? Sign up!</a>
+      <label class="item item-input">
+        <span class="input-label">Username</span>
+        <input type="text" value="ian@gmail.com" ng-model="user.email"></input>
+      </label>
+      <label class="item item-input">
+        <span class="input-label">Password</span>
+        <input type="password" value="ian" ng-model="user.password"></input>
+      </label>
+      <button class="button button-block button-positive" type="submit">Log in</button>
     </form>
-    <img src="img/Gold_Star.png">
+    <button ng-click="fbLogin()"class='button button-block button-positive'>Log in with facebook</button>
+    <a ui-sref="signUp" class="button button-calm button-block button-outline">Don't have an account? Sign up!</a>
   </ion-content>
 </ion-modal-view>
