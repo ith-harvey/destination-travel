@@ -2,7 +2,11 @@ angular.module('starter')
 
 .controller('loginCtrl', function($scope, $state, $ionicModal, $timeout, $cordovaOauth,loginService, facebookSearchService) {
 
-  $scope.user = {};
+  $scope.user = {
+    email: 'ian@gmail.com',
+    password: 'ian',
+  }
+
   let fbaccess_token
   console.log('loginCTRl is attached');
 
@@ -16,7 +20,7 @@ angular.module('starter')
   }
 
   $scope.fbLogin = function() {
-        $cordovaOauth.facebook("1981517632083291", ["email","user_relationships", "user_about_me"]).then(function(result) {
+        $cordovaOauth.facebook("1981517632083291", ["email", "user_about_me","user_friends","public_profile"]).then(function(result) {
           facebookSearchService.storeFbAccToken(result)
           console.log('here is our token -->',result.access_token)
             loginService.fbLogin(result).then(resultFromDb => {

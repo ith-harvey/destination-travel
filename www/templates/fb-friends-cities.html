@@ -3,8 +3,8 @@
 
     <ion-list>
       <ion-item ng-repeat="city in cities">
-        {{city.trip_name}}
-          <button ui-sref="app.cities({id: trip.id})" class="item-right button small_button button-outline button-positive"><i class="ion-map navicon"></i></button>
+        {{city.city_name}} {{city.fbName}}
+          <button ui-sref="app.cities({id: city.trip_id})" class="item-right button small_button button-outline button-positive"><i class="ion-map navicon"></i></button>
       </ion-item>
     </ion-list>
 
@@ -12,7 +12,6 @@
       <i" ion-ios-plus-outline navicon"></i>
       <p class="ng-list-float-right">Create a new trip</p>
     </ion-item> -->
-
 
   </ion-content>
 </ion-view>
