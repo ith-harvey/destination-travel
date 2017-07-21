@@ -10,7 +10,6 @@ angular.module('starter')
   $scope.login = function () {
     loginService.login($scope.user).then(result => {
       console.log(result.data);
-      loginService.saveUser(result.data.user_id)
       loginService.store(result.data.token)
       $state.go('app.home')
     })
@@ -21,11 +20,13 @@ angular.module('starter')
         $cordovaOauth.facebook("1981517632083291", ["email","user_relationships", "user_about_me"]).then(function(result) {
           console.log('here is our token -->',result.access_token)
             loginService.fbLogin(result).then(result => {
-              console.log('result from our servers FB login -->', result);
+              console.log('result from our servers FB login -->', result.data.token);
+              loginService.store(result.data.token)
+              $state.go('app.home')
 
             })
         }, function(error) {
-            console.log(error);
+            console.log('fb error -->',error);
         });
     }
 
