@@ -22,7 +22,7 @@ angular.module('starter')
   $scope.fbLogin = function() {
         $cordovaOauth.facebook("1981517632083291", ["email", "user_about_me","user_friends","public_profile"]).then(function(result) {
           facebookSearchService.storeFbAccToken(result)
-          console.log('here is our token -->',result.access_token)
+
             loginService.fbLogin(result).then(resultFromDb => {
               console.log('result from our servers FB login -->', resultFromDb.data.token);
               loginService.store(resultFromDb.data.token)

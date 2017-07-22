@@ -17,8 +17,34 @@ html {
   font-size: 2rem;
 }
 
-.ng-list-float-right {
-  text-align: right
+.img-vertical {
+  height: 34vh;
+}
+
+.img-horizontal {
+  height: 33vh;
+}
+
+.inline-text {
+  display: inline-block;
+  vertical-align: middle;
+  margin-left: 1rem;
+}
+
+.item-content {
+  padding: 16px 16px 16px 16px !important;
+  width: 100%;
+}
+
+.inline-icon {
+  display: inline-block;
+  vertical-align: middle;
+  color: DodgerBlue;
+  float:right;
+}
+
+.pos-icon {
+  margin-left: .25rem;
 }
 
 .pac-item {
@@ -33,6 +59,7 @@ html {
 #searchBar {
   padding-bottom: 2%;
 }
+
 
 .map-full {
   width: 100%;

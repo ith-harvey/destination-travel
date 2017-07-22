@@ -43,8 +43,9 @@
     <ion-scroll direction="y" style="height:35vh">
       <ion-list class="{{markerListClass}}">
         <ion-item ng-repeat="marker in markers">
-            {{marker.letter}}{{marker.marker_name}}
-            <button class="button small_button button-outline button-positive" ng-click="displayFire(marker)"><i class="icon small_button ion-ios-search ion-search"></i></button>
+            <span class="inline-text">{{marker.letter}}{{marker.marker_name}}</span>
+            <span class="inline-icon"><i ng-click="displayFire(marker)" class="icon small_button navicon ion-ios-search"></i></span>
+
         </ion-item>
       </ion-list>
     </ion-scroll>

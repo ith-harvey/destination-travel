@@ -1,17 +1,22 @@
 <ion-view view-title="facebook friends cities">
   <ion-content>
+    <div class="bar bar-header {{searchBarClass}} item-input-inset">
+        <label class="item-input-wrapper">
+            <i class="icon ion-ios-search placeholder-icon"></i>
+            <input type="text" ng-autocomplete ng-disabletap select-all-in-input ng-model="searchText" placeholder="search friend's cities">
+        </label>
+        <div class="buttons">
+          <button class="button button-outline button-positive" ng-click="result.location=''">Cancel</button>
+        </div>
+    </div>
 
     <ion-list>
-      <ion-item ng-repeat="city in cities">
-        {{city.city_name}} {{city.fbName}}
+      <ion-item ng-repeat="city in cities | filter:searchText">
+        <h3>{{city.city_name}}</h3>
+        <p>{{city.fbName}}</p>
           <button ui-sref="app.cities({id: city.trip_id})" class="item-right button small_button button-outline button-positive"><i class="ion-map navicon"></i></button>
       </ion-item>
     </ion-list>
-
-    <!-- <ion-item ui-sref="app.addtrips" class="ng-list-float-right" style="display: -webkit-box;">
-      <i" ion-ios-plus-outline navicon"></i>
-      <p class="ng-list-float-right">Create a new trip</p>
-    </ion-item> -->
 
   </ion-content>
 </ion-view>

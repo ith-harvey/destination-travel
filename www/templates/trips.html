@@ -2,16 +2,16 @@
   <ion-content>
 
     <ion-list>
-      <ion-item ng-repeat="trip in trips" href="#/app/trips/{{trip.id}}">
-        {{trip.trip_name}}
-          <button class="item-right button small_button button-outline button-positive" ng-click="deleteTrip(trip)">delete</button>
-          <button ui-sref="app.cities({id: trip.id})" class="item-right button small_button button-outline button-positive"><i class="ion-map navicon"></i></button>
+      <ion-item ng-repeat="trip in trips" style="display: -webkit-box;" href="#/app/trips/{{trip.id}}">
+        <span class="inline-text">{{trip.trip_name}}</span>
+          <span class="inline-icon"><i ng-click="deleteTrip(trip)" class=" ion-trash-a navicon"></i>
+          <i ui-sref="app.cities({id: trip.id})" class="ion-map navicon pos-icon"></i></span>
       </ion-item>
     </ion-list>
 
     <ion-item ui-sref="app.addtrips" class="ng-list-float-right" style="display: -webkit-box;">
-      <i" ion-ios-plus-outline navicon"></i>
-      <p class="ng-list-float-right">Create a new trip</p>
+      <span class="inline-text">Create a new trip</span>
+      <i class="ion-ios-plus-outline inline-icon navicon pos-icon"></i>
     </ion-item>
 
 
