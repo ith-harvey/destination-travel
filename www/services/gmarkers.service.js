@@ -20,6 +20,7 @@
       }
 
       gMarkersService.markerPost = function (cityId, savedMarker) {
+        console.log('posting marker', cityId);
         return $http({url: `${BASE_URL}/markers/cities/${cityId}`, method: "POST", data: { 'savedMarker' : savedMarker }
         })
       }

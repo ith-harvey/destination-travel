@@ -1,6 +1,6 @@
 
 
-angular.module('starter').controller('CitiesCtrl', function($scope, $state, citiesService, SessionsService, mapDetailsService, $ionicModal, mapService, $timeout) {
+angular.module('starter').controller('CitiesCtrl', function($scope, $state, citiesService, SessionsService, mapDetailsService, $ionicModal, mapService, $timeout, facebookSearchService) {
 
   $scope.destinationDisplay = false
   $scope.cityAddDisplay = false
@@ -13,6 +13,8 @@ angular.module('starter').controller('CitiesCtrl', function($scope, $state, citi
   $scope.destinationDisplayCity = {}
   $scope.description = {}
   $scope.alphabetArr = mapService.getAlphabetArr()
+  $scope.guestMode = facebookSearchService.guestModeActive()
+
 
 
   init()
@@ -103,7 +105,7 @@ angular.module('starter').controller('CitiesCtrl', function($scope, $state, citi
   }
 
   $scope.saveCityLocation = function () {
-      mapService.saveLocation('city',$scope.description.input,$state.params.id)
+      mapService.saveLocation('city', $scope.description.input, $state.params.id)
       $scope.description.input = ''
   }
 

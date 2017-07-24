@@ -21,5 +21,6 @@
       citiesService.delete = function (cityId) {
         return $http.delete(`${BASE_URL}/cities/${cityId}`)
       }
+
   }
 }());

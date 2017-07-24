@@ -5,8 +5,11 @@
       <a ng-click="goBackState()" class="button button-icon icon ion-ios-arrow-back"></a>
     </ion-nav-buttons>
     <ion-nav-buttons side="right">
-            <i ng-hide="markerAddDisplay" ng-click="markerChangeDisplay()" class="ion-ios-plus-outline navicon"></i>
-            <i ng-show="markerAddDisplay" ng-click="markerChangeDisplay()" class="ion-navicon-round navicon"></i>
+            <i ng-if="guestMode" ng-click="modal.show(); getGuestsTrips(markers)" class="ion-share navicon"></i>
+            <span ng-if="!guestMode">
+              <i ng-hide="markerAddDisplay" ng-click="markerChangeDisplay()" class="ion-ios-plus-outline navicon"></i>
+              <i ng-show="markerAddDisplay" ng-click="markerChangeDisplay()" class="ion-navicon-round navicon"></i>
+            </span>
     </ion-nav-buttons>
   </ion-nav-bar>
 
@@ -21,7 +24,6 @@
             <button class="button button-outline button-positive" ng-click="result.location=''">Cancel</button>
           </div>
     </div>
-
 
     <div id="markerMap" class="map-full {{markerMapClass}}" data-tap-disabled="true"></div>
 
@@ -56,7 +58,7 @@
       <div class="buttons" ng-click="modal.show(); stopProp($event)">
         <button class="button">
           <div id="star-button-div">
-            <img class="gold-star" src="../img/Gold_star.png">
+            <img class="gold-star" src="img/Gold_Star.png">
           </div>
           <p class="star-text-p">Save location</p>
         </button>

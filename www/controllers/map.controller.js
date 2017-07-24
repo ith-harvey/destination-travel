@@ -1,10 +1,11 @@
 angular.module('starter')
 
-.controller('markerMapCtrl', function($scope, $rootScope, $state, mapDetailsService, gMarkersService, $ionicModal, mapService) {
+.controller('markerMapCtrl', function($scope, $rootScope, $state, mapDetailsService, gMarkersService, $ionicModal, mapService, facebookSearchService, $ionicPopup, tripsService, citiesService) {
   $scope.markerAddDisplay = true
   $scope.markerMapClass = 'map-full'
   $scope.markerListClass = 'list-hide'
   $scope.searchBarClass = 'search-show'
+
 
   const currCity = angular.fromJson($state.params.city)
   $scope.mapWatchService = mapService
@@ -15,8 +16,38 @@ angular.module('starter')
   $scope.marker = {}
   $scope.markers = []
   $scope.alphabetArr = mapService.getAlphabetArr()
+  $scope.guestMode = facebookSearchService.guestModeActive()
+  $scope.trips = []
 
   init()
+
+  $scope.showImportConfirm = function(trip) {
+    var confirmPopup = $ionicPopup.confirm({
+      title: 'Adopt this city',
+      template: 'Do you want to import this city to one of your trips?'
+    });
+
+    confirmPopup.then(function(res) {
+      if(res) {
+        facebookSearchService.duplicateAndSaveCity( currCity, trip.id ).then(result => {
+          console.log('the city we just posted!', result.data.trip_city[0].city_id);
+          facebookSearchService.duplicateAndSaveMarkers(result.data.trip_city[0].city_id, $scope.markers).then(markerz => {
+            $scope.modal.hide()
+          })
+        }).catch(err => {
+          console.log(
+            'this is the error',err);
+        })
+      } else {
+        $scope.modal.hide()
+        console.log('You are not sure');
+      }
+    });
+  };
+
+
+
+
 
   // declare modal
   $ionicModal.fromTemplateUrl('templates/marker-modal.html', function(modal) {
@@ -133,6 +164,17 @@ angular.module('starter')
       init()
     })
 
+  }
+
+  $scope.getGuestsTrips = function (markers) {
+    console.log('hitting getGuestsTrips');
+    tripsService.individualUser().then(trips => {
+      console.log('hitting getGuestsTrips',trips.data.trips);
+      console.log('hitting getGuestsTrips',trips.data.trips[0]);
+      $scope.trips = trips.data.trips
+    }).catch(err => {
+      console.log(err);
+    })
   }
 
 })

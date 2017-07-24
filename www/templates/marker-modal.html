@@ -6,16 +6,26 @@
         <button class="button button-outline button-positive" ng-click="modal.hide()">Cancel</button>
       </div>
     </ion-header-bar>
-    
+
     <ion-content>
-      <h2>{{details.formatted_address}}</h2>
-      <p>rating: {{details.rating}}</p>
-      <p>price level: {{details.price_level}}</p>
-      <label class="item item-input item-stacked-label">
-        <span class="input-label">Description</span>
-        <textarea class="text-area" select-all-in-input ng-model="description.input" placeholder="add some notes for yourself, friends and family!">
-        </textarea>
-      </label>
-      <button type="submit" ng-click="saveLocation(); modal.hide()" class="button button-positive">Save location</button>
+      <span ng-if=guestMode>
+        <ion-list>
+          <ion-item ng-click="showImportConfirm(trip)" ng-repeat="trip in trips" style="display: -webkit-box;">
+            <span class="inline-text">{{trip.trip_name}}</span>
+          </ion-item>
+        </ion-list>
+      </span>
+
+      <span ng-if=!guestMode>
+        <h2>{{details.formatted_address}}</h2>
+        <p>rating: {{details.rating}}</p>
+        <p>price level: {{details.price_level}}</p>
+        <label class="item item-input item-stacked-label">
+          <span class="input-label">Description</span>
+          <textarea class="text-area" select-all-in-input ng-model="description.input" placeholder="add some notes for yourself, friends and family!">
+          </textarea>
+        </label>
+        <button type="submit" ng-click="saveLocation(); modal.hide()" class="button button-positive">Save location</button>
+      </span>
     </ion-content>
 </ion-modal-view>

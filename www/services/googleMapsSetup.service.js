@@ -118,10 +118,13 @@
 
       // Watches for fireSearchWithItemDetails to fire, once it does it checks for the object. If there is an object it runs search
       mapService.saveLocation = function(resource, description, postToId ) {
-
+        console.log('in save ---->', resource);
+        console.log('in save ---->', resource, description, postToId);
         let details = mapDetailsService.getSearchItemDetails()
+        console.log('details', details);
         let lat = details.geometry.location.lat()
         let lng = details.geometry.location.lng()
+        console.log('lat lng ---->', lat, lng);
 
           while(searchedMarker.length) {
             searchedMarker.pop().setMap(null)
@@ -155,8 +158,10 @@
 
         //pushing marker(gmaps formatted) into local array
         starredMarkers.push(marker(resource))
+
+        console.log('details-->',details);
           let dbmarker = {}
-          dbmarker[`${resource}_name`] = details.name,
+          dbmarker[`${resource}_name`] = details.formatted_address,
           dbmarker[`${resource}_description`] = description,
           dbmarker[`${resource}_lat`] = lat.toString(),
           dbmarker[`${resource}_lng`] = lng.toString()
@@ -169,6 +174,7 @@
         if (resource === 'marker') {
           //posting marker(dbase formatted)
           dbmarker.city_id = postToId
+          dbmarker.marker_name = details.name
           gMarkersService.markerPost(postToId, dbmarker).then(result => {
             console.log('result from gMarkers Service', result);
           })
