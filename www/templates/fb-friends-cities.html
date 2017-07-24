@@ -12,9 +12,9 @@
 
     <ion-list>
       <ion-item ng-repeat="city in cities | filter:searchText">
-        <h3>{{city.city_name}}</h3>
-        <p>{{city.fbName}}</p>
-          <button ui-sref="app.cities({id: city.trip_id})" class="item-right button small_button button-outline button-positive"><i class="ion-map navicon"></i></button>
+        <span class="inline-text"><h3>{{city.city_name}}</h3>
+        <p>{{city.fbName}}</p></span>
+        <span class="inline-icon"><i ui-sref="app.cities({id: city.trip_id})" class="icon small_button navicon ion-map"></i></span>
       </ion-item>
     </ion-list>
 
