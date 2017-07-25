@@ -1,16 +1,17 @@
 angular.module('starter')
 
 .controller('markerMapCtrl', function($scope, $rootScope, $state, mapDetailsService, gMarkersService, $ionicModal, mapService, facebookSearchService, $ionicPopup, tripsService, citiesService) {
-  $scope.markerAddDisplay = true
-  $scope.markerMapClass = 'map-full'
-  $scope.markerListClass = 'list-hide'
-  $scope.searchBarClass = 'search-show'
+  $scope.markerAddDisplay = false
+  $scope.markerMapClass = 'map-half'
+  $scope.markerListClass = 'list-half'
+  $scope.searchBarClass = 'search-hide'
 
 
   const currCity = angular.fromJson($state.params.city)
   $scope.mapWatchService = mapService
   $scope.destinationDisplay = false
-  $scope.footerActive = false
+  $scope.footer = {}
+  $scope.footer.active = false
   $scope.modal
   $scope.description = {}
   $scope.marker = {}
@@ -55,7 +56,9 @@ angular.module('starter')
     scope: $scope
   })
 
-  function init () {
+  function init() {
+    console.log('redrawing markers!');
+    $scope.footer.active = false
     mapService.render('markerMap', 11, currCity)
 
     // Once markers are retreived from device a new map is rendered
@@ -75,7 +78,6 @@ angular.module('starter')
         mapService.placeMarkers(markers.data.markers, 'marker', iconImage)
 
         $scope.markers = markers.data.markers.map( (value, index) => {
-          console.log('marker --->',value);
           value.letter = $scope.alphabetArr[index] +'. '
           return value
         })
@@ -95,7 +97,7 @@ angular.module('starter')
   // retreives lat lng using googles geocode
   $scope.searchMap = function(address) {
     mapService.search(address)
-    $scope.footerActive = true
+    $scope.footer.active = true
     $scope.markerMapClass = 'map-with-destination'
     $scope.details = mapDetailsService.getSearchItemDetails()
   }

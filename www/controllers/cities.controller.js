@@ -1,6 +1,6 @@
 
 
-angular.module('starter').controller('CitiesCtrl', function($scope, $state, citiesService, SessionsService, mapDetailsService, $ionicModal, mapService, $timeout, facebookSearchService) {
+angular.module('starter').controller('CitiesCtrl', function($scope, $state, citiesService, SessionsService, mapDetailsService, $ionicModal, mapService, $timeout, facebookSearchService, $rootScope) {
 
   $scope.destinationDisplay = false
   $scope.cityAddDisplay = false
@@ -15,9 +15,11 @@ angular.module('starter').controller('CitiesCtrl', function($scope, $state, citi
   $scope.alphabetArr = mapService.getAlphabetArr()
   $scope.guestMode = facebookSearchService.guestModeActive()
 
+  // init()
 
-
-  init()
+  $rootScope.$on('$ionicView.enter', function (event, data) {
+    init()
+  })
 
   // declare modal
   $ionicModal.fromTemplateUrl('templates/city-modal.html', function(modal) {

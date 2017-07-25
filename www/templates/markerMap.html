@@ -35,7 +35,7 @@
         <h4 class="card-text-address">{{details.formatted_address}}</h2>
         <img class="card-text card-img" src="{{details.photos[0].getUrl({'maxWidth': 270, 'maxHeight': 300})}}">
         <p class="card-text">rating: {{details.rating}}</p>
-        <p class="card-text" ng-if="{{details.price_level}}">price level: {{details.price_level}}</p>
+        <p class="card-text" ng-if="details.price_level">price level: {{details.price_level}}</p>
         <p class="card-text">hours:</p>
         <p class="card-text-inset">{{details.opening_hours.weekday_text[0]}}<br> {{details.opening_hours.weekday_text[1]}}<br>{{details.opening_hours.weekday_text[2]}}<br>{{details.opening_hours.weekday_text[3]}}<br>{{details.opening_hours.weekday_text[4]}}<br>{{details.opening_hours.weekday_text[5]}}<br>{{details.opening_hours.weekday_text[6]}}<br>{{details.opening_hours.weekday_text[7]}}</p>
 
@@ -62,8 +62,9 @@
       </ion-list>
     </ion-scroll>
 
+    <!-- ng-show="!destinationDisplay&&footerActive&&markerAddDisplay" -->
 
-    <ion-footer-bar ng-show="!destinationDisplay&&footerActive&&markerAddDisplay" ng-click="displayFire()" id="destinationFooterBar" align-title="left" class="bar-assertive">
+    <ion-footer-bar ng-show="footer.active" ng-click="displayFire()" id="destinationFooterBar" align-title="left" class="bar-assertive">
       <h1 class="title">{{details.name}}</h1>
       <div class="buttons" ng-click="modal.show(); stopProp($event)">
         <button class="star-button button">

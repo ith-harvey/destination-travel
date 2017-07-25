@@ -1,13 +1,14 @@
 (function() {
   angular.module('starter').run(run)
 
-  run.$inject = ['$rootScope', '$state', 'SessionsService', '$ionicViewSwitcher','$ionicHistory', 'loginService' ]
+  run.$inject = ['$rootScope', '$state', 'SessionsService', '$ionicViewSwitcher','$ionicHistory', 'loginService']
 
   function run ($rootScope, $state, SessionsService, $ionicViewSwitcher, $ionicHistory, loginService) {
 
     $rootScope.goBackState = function() {
       $ionicViewSwitcher.nextDirection('back');
       $ionicHistory.goBack();
+      
     }
 
     $rootScope.$on('$stateChangeStart', function (evt, toState, toParams, fromState, fromParams) {
@@ -18,7 +19,8 @@
         evt.preventDefault();
         $state.go('login', {notification: notification});
       }
-
     });
+
+
   }
 }());
