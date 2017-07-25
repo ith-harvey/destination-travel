@@ -94,7 +94,6 @@ html {
   height: 12%;
 }
 
-
 .text-area {
   height: 5rem;
 }
@@ -130,10 +129,72 @@ html {
   border-bottom: 0px;
 }
 
+.card-text, .card-text-inset, .card-text-address  {
+  margin: 0rem 3rem .25rem 1rem;
+}
+
+.card-text-inset {
+  margin-left: 2rem;
+}
+
+.card-title {
+  white-space: normal;
+  font-size: 1.75rem;
+  line-height: 1.25rem;
+  margin: 0 1rem .1rem 0rem;
+}
+
+.card-img {
+  border-radius: .2rem;
+  margin-left: auto;
+  margin-right: auto;
+  display: block;
+}
+
+.card-img-city {
+  margin-top: 1rem;
+  margin-bottom: 2rem;
+}
+
+.card-text-address {
+  font-size: 1rem;
+  margin-top: 1rem;
+  margin-right: 1rem;
+  margin-bottom: 1rem;
+
+}
+
+.card-button {
+  margin: .75rem 3rem 0 0;
+
+}
+.card-heading {
+  margin-top: .2rem;
+}
 
 #destinationDisplay {
   height: 80%;
   top: 10%;
   position: absolute;
   z-index: 99;
+}
+
+.loader {
+  border: 16px solid #f3f3f3;
+  border-radius: 50%;
+  border-top: 16px solid #3498db;
+  width: 120px;
+  height: 120px;
+  -webkit-animation: spin 2s linear infinite;
+  animation: spin 2s linear infinite;
+}
+
+@-webkit-keyframes spin {
+  0% { -webkit-transform: rotate(0deg); }
+  100% { -webkit-transform: rotate(360deg); }
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
 }

@@ -28,24 +28,34 @@
     <div id="markerMap" class="map-full {{markerMapClass}}" data-tap-disabled="true"></div>
 
     <div class="card" id="destinationDisplay" ng-if="destinationDisplay" ng-click="displayFire()">
-      <div scroll="true" class="item item-text-wrap">
-        <h1 class="title">{{details.name}}</h1>
-        <h2>{{details.formatted_address}}</h2>
-        <p>rating: {{details.rating}}</p>
-        <p>price level: {{details.price_level}}</p>
-        <p>{{details.opening_hours.weekday_text[0]}}</p>
-        <p>{{details.international_phone_number}}</p>
+      <ion-scroll direction="y" style="height:74vh">
+        <div class="item item-divider item-calm">
+          <div class="title card-title card-text">{{details.name}}</div>
+        </div>
+        <h4 class="card-text-address">{{details.formatted_address}}</h2>
+        <img class="card-text card-img" src="{{details.photos[0].getUrl({'maxWidth': 270, 'maxHeight': 300})}}">
+        <p class="card-text">rating: {{details.rating}}</p>
+        <p class="card-text" ng-if="{{details.price_level}}">price level: {{details.price_level}}</p>
+        <p class="card-text">hours:</p>
+        <p class="card-text-inset">{{details.opening_hours.weekday_text[0]}}<br> {{details.opening_hours.weekday_text[1]}}<br>{{details.opening_hours.weekday_text[2]}}<br>{{details.opening_hours.weekday_text[3]}}<br>{{details.opening_hours.weekday_text[4]}}<br>{{details.opening_hours.weekday_text[5]}}<br>{{details.opening_hours.weekday_text[6]}}<br>{{details.opening_hours.weekday_text[7]}}</p>
+
+        <p class="card-text">phone number: {{details.international_phone_number}}</p>
         <a href="{{details.webiste}}">{{details.webiste}}</a>
-      </div>
-      <div class="buttons">
-        <button class="button button-outline button-positive" ng-click="deleteMarker(details.markerDbObj)">Delete</button>
-      </div>
+        <div class="buttons">
+          <i ng-click="deleteMarker(details.markerDbObj)" class="inline-icon card-button ion-trash-a navicon"></i>
+        </div>
+      </ion-scroll>
     </div>
+
 
     <ion-scroll direction="y" style="height:35vh">
       <ion-list class="{{markerListClass}}">
         <ion-item ng-repeat="marker in markers">
-            <span class="inline-text">{{marker.letter}}{{marker.marker_name}}</span>
+            <span class="inline-text">{{marker.letter}}{{marker.marker_name}}
+              <!-- <p>
+                marker
+              </p> -->
+            </span>
             <span class="inline-icon"><i ng-click="displayFire(marker)" class="icon small_button navicon ion-ios-search"></i></span>
 
         </ion-item>

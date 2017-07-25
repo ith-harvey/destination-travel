@@ -70,6 +70,7 @@ angular.module('starter').controller('CitiesCtrl', function($scope, $state, citi
     mapService.getPlaceInfo(city_place_id, function (place,status) {
       $scope.$apply(function () {
         $scope.googDetails = place
+        console.log($scope.googDetails);
         $scope.cardDisplayChange()
       })
     })
@@ -81,7 +82,6 @@ angular.module('starter').controller('CitiesCtrl', function($scope, $state, citi
 
   $scope.deleteCity = function (city) {
     $scope.cities.splice($scope.cities.indexOf(city),1);
-    // mapService.removeMarker()
     citiesService.delete(city.city_id).then( response => {
       console.log(response);
       init()

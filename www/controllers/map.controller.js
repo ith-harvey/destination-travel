@@ -46,9 +46,6 @@ angular.module('starter')
   };
 
 
-
-
-
   // declare modal
   $ionicModal.fromTemplateUrl('templates/marker-modal.html', function(modal) {
     $scope.modal = modal
@@ -78,6 +75,7 @@ angular.module('starter')
         mapService.placeMarkers(markers.data.markers, 'marker', iconImage)
 
         $scope.markers = markers.data.markers.map( (value, index) => {
+          console.log('marker --->',value);
           value.letter = $scope.alphabetArr[index] +'. '
           return value
         })
@@ -109,6 +107,7 @@ angular.module('starter')
       mapService.getPlaceInfo(marker.marker_place_id, function (place,status) {
         $scope.$apply(function () {
           $scope.details = place
+          console.log($scope.details);
           $scope.details.markerDbObj = marker
               $scope.destinationDisplay ? $scope.destinationDisplay = false : $scope.destinationDisplay = true
         })

@@ -26,17 +26,19 @@
     </div>
 
     <div class="card" id="destinationDisplay" ng-if="destinationDisplay" ng-click="cardDisplayChange()">
-      <div scroll="true" class="item item-text-wrap">
-        <h1 class="title">{{googDetails.name}}</h1>
-        <img src="{{googDetails.photos[0].getUrl({'maxWidth': 200, 'maxHeight': 200})}}">
-        <p ng-if="dbDetails.city_description">Description: {{dbDetails.city_description}}</p>
-      </div>
-      <div class="buttons">
-        <button class="button button-outline button-positive" ng-click="result.location=''">Edit</button>
-      </div>
-      <div class="buttons">
-        <button class="button button-outline button-positive" ng-click="deleteCity({{dbDetails}})">Delete</button>
-      </div>
+      <ion-scroll direction="y" style="height:74vh">
+        <div class="item item-divider item-calm">
+          <div class="title card-title card-text">{{googDetails.name}}</div>
+        </div>
+
+        <img ng-if="googDetails.photos[0].getUrl({'maxWidth': 275, 'maxHeight': 300})" class="card-text card-img card-img-city" src="{{googDetails.photos[0].getUrl({'maxWidth': 270, 'maxHeight': 300})}}">
+        <p class="card-heading"ng-if="dbDetails.city_description">Description:</p>
+        <p class="card-text"ng-if="dbDetails.city_description">{{dbDetails.city_description}}</p>
+
+        <div class="buttons">
+          <i ng-click="deleteCity({{dbDetails}})" class="inline-icon card-button ion-trash-a navicon"></i>
+        </div>
+      </ion-scroll>
     </div>
 
     <div id="cityMap" class="{{cityMapClass}}" data-tap-disabled="true"></div>
