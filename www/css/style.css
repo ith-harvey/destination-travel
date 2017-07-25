@@ -105,8 +105,14 @@ html {
 }
 
 .star-text-p {
+  top:1.5rem;
+  font-size: .8rem;
   height: 1.5rem;
   position: absolute;
+}
+
+.star-button {
+  width: 6rem;
 }
 
 .small_button {

@@ -7,6 +7,8 @@ angular.module('starter')
   $scope.tripInput = {}
   $scope.cityInput = {}
 
+
+
   init()
 
   // initialize modal
@@ -49,6 +51,7 @@ angular.module('starter')
       $scope.trips = trips.data.trips
 
     })
+
   }
 
 
