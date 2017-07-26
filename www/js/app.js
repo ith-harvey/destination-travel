@@ -5,6 +5,7 @@
 // 'starter.controllers' is found in controllers.js
 angular.module('starter', ['ionic', 'starter.controllers', 'ngCordova'])
   .constant('BASE_URL', 'https://mighty-meadow-57002.herokuapp.com')
+  // .constant('BASE_URL', 'http://localhost:3000')
 
   .run(function($ionicPlatform) {
     $ionicPlatform.ready(function() {
