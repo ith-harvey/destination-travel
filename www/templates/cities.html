@@ -46,7 +46,9 @@
       <ion-scroll style="height:35vh" direction="y" scrollbar-y="false">
         <ion-list class="{{cityListClass}}">
           <ion-item ng-repeat="city in cities">
-            <span class="inline-text">{{city.letter}}{{city.city_name}}</span>
+            <span class="inline-text">{{city.letter}}{{city.city_name}}
+            <p class="list-marker-p">markers: {{city.marker_count}}</p>
+            </span>
 
             <span class="inline-icon"><i ng-click="displayFire(city.city_place_id,city)" class=" ion-ios-search navicon"></i>
             <i ng-click="sendToMarkerMap(city)" class="ion-map navicon pos-icon"></i></span>

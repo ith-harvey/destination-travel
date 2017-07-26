@@ -21,6 +21,10 @@ html {
   height: 34vh;
 }
 
+.list-marker-p {
+  margin-left: 1.5rem;
+}
+
 .loginBtn {
   box-sizing: border-box;
   position: relative;

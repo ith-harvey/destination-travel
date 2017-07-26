@@ -35,24 +35,27 @@ angular.module('starter').controller('CitiesCtrl', function($scope, $state, citi
   function init () {
 
     $scope.footerbarclass = "footer-bar-hide"
-    citiesService.all().then(cities => {
-      $scope.cities = cities.data.trips
-
-    })
+    // citiesService.all().then(cities => {
+    //   console.log('cities',cities);
+    //   $scope.cities = cities.data.trips
+    // })
 
     citiesService.allCitiesByTrip($state.params.id).then(cities => {
+      console.log('cities --->', cities);
 
       //render the map function profile = .render(mapId, mapZoom)
       mapService.render("cityMap",2)
 
       //set cities(for ng-list & google map)
-      mapService.placeMarkers(cities.data.cities,'city')
+      mapService.placeMarkers(cities.data.compiledCities,'city')
 
-      $scope.cities = cities.data.cities.map( (value, index) => {
+      $scope.cities = cities.data.compiledCities.map( (value, index) => {
         value.letter = alphabetArr[index] +'. '
         return value
       })
+
     })
+
   }
 
   $scope.$watch('watchingDetails', function(newVal, oldVal) {
