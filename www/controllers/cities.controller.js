@@ -34,6 +34,8 @@ angular.module('starter').controller('CitiesCtrl', function($scope, $state, citi
   })
 
   function init () {
+
+    $scope.footerbarclass = "footer-bar-hide"
     citiesService.all().then(cities => {
       $scope.cities = cities.data.trips
     })
@@ -97,11 +99,14 @@ angular.module('starter').controller('CitiesCtrl', function($scope, $state, citi
       $scope.cityMapClass = 'map-full'
       $scope.cityListClass = 'list-hide'
       $scope.searchBarClass = 'search-show'
+      $scope.footerbarclass = "footer-bar-hide"
       $scope.cityAddDisplay = true
+
     } else {
       $scope.cityMapClass = 'map-half'
       $scope.cityListClass = 'list-half'
       $scope.searchBarClass = 'search-hide'
+      $scope.footerbarclass = "footer-bar-hide"
       $scope.cityAddDisplay = false
       init()
     }

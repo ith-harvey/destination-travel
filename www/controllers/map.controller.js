@@ -60,7 +60,6 @@ angular.module('starter')
   })
 
   function init() {
-
     $scope.footerbarclass = "footer-bar-hide"
 
     console.log('footer in pageload -->',$scope.footerbarclass);
@@ -95,7 +94,7 @@ angular.module('starter')
   $scope.$watch('watchingDetails', function(newVal, oldVal) {
       if (newVal.show) {
         console.log('what triggers the if!',newVal);
-        $scope.searchMap(newVal.formatted_address)
+        $scope.searchMap(newVal.tripDetails.formatted_address)
         console.log('search is getting run!');
       }
     }, true)
