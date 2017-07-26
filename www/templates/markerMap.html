@@ -5,11 +5,11 @@
       <a ng-click="goBackState()" class="button button-icon icon ion-ios-arrow-back"></a>
     </ion-nav-buttons>
     <ion-nav-buttons side="right">
-            <i ng-if="guestMode" ng-click="modal.show(); getGuestsTrips(markers)" class="ion-share navicon"></i>
-            <span ng-if="!guestMode">
-              <i ng-hide="markerAddDisplay" ng-click="markerChangeDisplay()" class="ion-ios-plus-outline navicon"></i>
-              <i ng-show="markerAddDisplay" ng-click="markerChangeDisplay()" class="ion-navicon-round navicon"></i>
-            </span>
+      <i ng-if="guestMode" ng-click="modal.show(); getGuestsTrips(markers)" class="ion-share navicon"></i>
+      <span ng-if="!guestMode">
+        <i ng-hide="markerAddDisplay" ng-click="markerChangeDisplay()" class="ion-ios-plus-outline navicon"></i>
+        <i ng-show="markerAddDisplay" ng-click="markerChangeDisplay()" class="ion-navicon-round navicon"></i>
+      </span>
     </ion-nav-buttons>
   </ion-nav-bar>
 
@@ -51,11 +51,14 @@
     <ion-scroll direction="y" style="height:35vh">
       <ion-list class="{{markerListClass}}">
         <ion-item ng-repeat="marker in markers">
-            <span class="inline-text">{{marker.letter}}{{marker.marker_name}}
+          <span class="inline-text">{{marker.letter}}{{marker.marker_name}}
 
-            </span>
-            <span class="inline-icon"><i ng-click="displayFire(marker)" class="icon small_button navicon ion-ios-search"></i></span>
-
+          </span>
+          <span class="inline-icon"><i ng-click="displayFire(marker)" class="icon small_button navicon ion-ios-search"></i></span>
+        </ion-item>
+        <ion-item ng-if="!markers.length" ng-click="markerChangeDisplay()">
+        <span class="inline-text">Create a new marker</span>
+        <i class="ion-ios-plus-outline inline-icon navicon pos-icon"></i>
         </ion-item>
       </ion-list>
     </ion-scroll>

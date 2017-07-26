@@ -1,5 +1,4 @@
 
-
 angular.module('starter').controller('CitiesCtrl', function($scope, $state, citiesService, SessionsService, mapDetailsService, $ionicModal, mapService, $timeout, facebookSearchService, $rootScope) {
 
   $scope.destinationDisplay = false
@@ -38,6 +37,7 @@ angular.module('starter').controller('CitiesCtrl', function($scope, $state, citi
     $scope.footerbarclass = "footer-bar-hide"
     citiesService.all().then(cities => {
       $scope.cities = cities.data.trips
+
     })
 
     citiesService.allCitiesByTrip($state.params.id).then(cities => {
