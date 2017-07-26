@@ -13,7 +13,8 @@
     <ion-list>
       <ion-item ng-repeat="city in cities | filter:searchText">
         <span class="inline-text"><h3>{{city.city_name}}</h3>
-        <p>{{city.fbName}}</p></span>
+        <p>{{city.fbName}} | <img class="gold-star-inlist" src="img/Gold_Star.png"> {{city.marker_count}}</p>
+        </span>
         <span class="inline-icon"><i ui-sref="app.cities({id: city.trip_id})" class="icon small_button navicon ion-map"></i></span>
       </ion-item>
     </ion-list>

@@ -135,6 +135,11 @@ html {
   position: relative;
 }
 
+.gold-star-inlist {
+  height: .75rem;
+  position: relative;
+}
+
 .star-text-p {
   top:1.5rem;
   font-size: .8rem;
