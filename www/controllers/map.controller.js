@@ -5,13 +5,16 @@ angular.module('starter')
   $scope.markerMapClass = 'map-half'
   $scope.markerListClass = 'list-half'
   $scope.searchBarClass = 'search-hide'
+  $scope.footerbarclass = "footer-bar-hide"
+  $scope.watchingDetails = mapDetailsService.details
+  $scope.watchingDetails.show = false
 
 
   const currCity = angular.fromJson($state.params.city)
   $scope.mapWatchService = mapService
   $scope.destinationDisplay = false
-  $scope.footer = {}
-  $scope.footer.active = false
+  // $scope.footer = {}
+  $scope.footeractive = true
   $scope.modal
   $scope.description = {}
   $scope.marker = {}
@@ -57,8 +60,11 @@ angular.module('starter')
   })
 
   function init() {
-    console.log('redrawing markers!');
-    $scope.footer.active = false
+
+    $scope.footerbarclass = "footer-bar-hide"
+
+    console.log('footer in pageload -->',$scope.footerbarclass);
+
     mapService.render('markerMap', 11, currCity)
 
     // Once markers are retreived from device a new map is rendered
@@ -85,11 +91,12 @@ angular.module('starter')
     })
   }
 
-  $scope.$watch( function() {
-    return mapDetailsService.fireSearchWithItemDetails()
-  }, function(newVal, oldVal) {
-      if (typeof newVal === 'object') {
+
+  $scope.$watch('watchingDetails', function(newVal, oldVal) {
+      if (newVal.show) {
+        console.log('what triggers the if!',newVal);
         $scope.searchMap(newVal.formatted_address)
+        console.log('search is getting run!');
       }
     }, true)
 
@@ -97,7 +104,8 @@ angular.module('starter')
   // retreives lat lng using googles geocode
   $scope.searchMap = function(address) {
     mapService.search(address)
-    $scope.footer.active = true
+    $scope.footerbarclass = "footer-bar-show"
+
     $scope.markerMapClass = 'map-with-destination'
     $scope.details = mapDetailsService.getSearchItemDetails()
   }

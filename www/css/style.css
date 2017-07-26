@@ -21,8 +21,30 @@ html {
   height: 34vh;
 }
 
+.loginBtn {
+  box-sizing: border-box;
+  position: relative;
+  margin: 0.2em;
+  padding: 0 15px 0 46px;
+  border: none;
+  text-align: left;
+  line-height: 34px;
+  white-space: nowrap;
+  border-radius: 0.2em;
+  font-size: 16px;
+  color: #FFF;
+}
+
 .img-horizontal {
   height: 33vh;
+}
+
+.fb-image {
+  height: 2rem;
+  width: 2rem;
+  vertical-align: middle;
+  margin-top: .25rem;
+  float: left;
 }
 
 .inline-text {
@@ -89,9 +111,15 @@ html {
   height: 80%;
 }
 
-#destinationFooterBar {
+.footer-bar-show {
   width: 100%;
   height: 12%;
+  color: blue;
+  display: block;
+}
+
+.footer-bar-hide {
+  display: none;
 }
 
 .text-area {
@@ -140,7 +168,7 @@ html {
 .card-title {
   white-space: normal;
   font-size: 1.75rem;
-  line-height: 1.25rem;
+  line-height: 1.5rem;
   margin: 0 1rem .1rem 0rem;
 }
 

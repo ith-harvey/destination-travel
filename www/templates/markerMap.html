@@ -52,9 +52,7 @@
       <ion-list class="{{markerListClass}}">
         <ion-item ng-repeat="marker in markers">
             <span class="inline-text">{{marker.letter}}{{marker.marker_name}}
-              <!-- <p>
-                marker
-              </p> -->
+
             </span>
             <span class="inline-icon"><i ng-click="displayFire(marker)" class="icon small_button navicon ion-ios-search"></i></span>
 
@@ -62,18 +60,17 @@
       </ion-list>
     </ion-scroll>
 
-    <!-- ng-show="!destinationDisplay&&footerActive&&markerAddDisplay" -->
+      <ion-footer-bar ng-click="displayFire()" align-title="left" ng-class="footerbarclass" class="bar-assertive">
+        <h1 class="title">{{details.name}}</h1>
+        <div class="buttons" ng-click="modal.show(); stopProp($event)">
+          <button class="star-button button">
+            <div id="star-button-div">
+              <img class="gold-star" src="img/Gold_Star.png">
+            </div>
+            <p class="star-text-p">Save location</p>
+          </button>
+        </div>
+      </ion-footer-bar>
 
-    <ion-footer-bar ng-show="footer.active" ng-click="displayFire()" id="destinationFooterBar" align-title="left" class="bar-assertive">
-      <h1 class="title">{{details.name}}</h1>
-      <div class="buttons" ng-click="modal.show(); stopProp($event)">
-        <button class="star-button button">
-          <div id="star-button-div">
-            <img class="gold-star" src="img/Gold_Star.png">
-          </div>
-          <p class="star-text-p">Save location</p>
-        </button>
-      </div>
-    </ion-footer-bar>
   </ion-content>
 </ion-view>

@@ -6,10 +6,13 @@ angular.module('starter').controller('CitiesCtrl', function($scope, $state, citi
   $scope.cityAddDisplay = false
   const alphabetArr = mapService.getAlphabetArr()
   $scope.cities = [];
-  $scope.footerActive = false
   $scope.cityMapClass = 'map-half'
   $scope.cityListClass = 'list-half'
   $scope.searchBarClass = 'search-hide'
+  $scope.footerbarclass = "footer-bar-hide"
+  $scope.watchingDetails = mapDetailsService.details
+  $scope.watchingDetails.show = false
+
   $scope.destinationDisplayCity = {}
   $scope.description = {}
   $scope.alphabetArr = mapService.getAlphabetArr()
@@ -50,17 +53,17 @@ angular.module('starter').controller('CitiesCtrl', function($scope, $state, citi
     })
   }
 
-  $scope.$watch( function() {
-    return mapDetailsService.fireSearchWithItemDetails()
-  }, function(newVal, oldVal) {
-      if (typeof newVal === 'object') {
-        $scope.searchMap(newVal.formatted_address)
+  $scope.$watch('watchingDetails', function(newVal, oldVal) {
+      if (newVal.show) {
+        console.log('what triggers the if!',newVal);
+        $scope.searchMap(newVal.tripDetails.formatted_address)
+        console.log('search is getting run!');
       }
     }, true)
 
   $scope.searchMap = function(address) {
     mapService.search(address)
-    $scope.footerActive = true
+    $scope.footerbarclass = "footer-bar-show"
     $scope.cityMapClass = 'map-with-destination'
     $scope.googDetails = mapDetailsService.getSearchItemDetails()
   }
@@ -72,7 +75,6 @@ angular.module('starter').controller('CitiesCtrl', function($scope, $state, citi
     mapService.getPlaceInfo(city_place_id, function (place,status) {
       $scope.$apply(function () {
         $scope.googDetails = place
-        console.log($scope.googDetails);
         $scope.cardDisplayChange()
       })
     })
@@ -96,7 +98,6 @@ angular.module('starter').controller('CitiesCtrl', function($scope, $state, citi
       $scope.cityListClass = 'list-hide'
       $scope.searchBarClass = 'search-show'
       $scope.cityAddDisplay = true
-      $scope.footerActive = false
     } else {
       $scope.cityMapClass = 'map-half'
       $scope.cityListClass = 'list-half'
