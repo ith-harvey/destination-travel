@@ -40,6 +40,7 @@ angular.module('starter').service('facebookSearchService', facebookSearchService
       delete city.updated_at
       delete city.trip_description
       delete city.letter
+      delete city.marker_count
       return citiesService.postMarker(tripId,city)
     }
 
