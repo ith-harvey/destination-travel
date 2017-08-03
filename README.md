@@ -28,7 +28,7 @@ More info on this can be found on the Ionic [Getting Started](http://ionicframew
 
 ## Contributing
 
-Please read [CONTRIBUTING.md](https://gist.github.com/PurpleBooth/b24679402957c63ec426) for details on our code of conduct, and the process for submitting pull requests to us.
+Open to all contribution just feel free to ping me or mark issues. Thanks!
 
 ## License
 
@@ -36,4 +36,4 @@ This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md
 
 ## Acknowledgments
 
-* Hat tip to anyone @wreid
+* Hat tip to @wreid
