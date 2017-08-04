@@ -1,5 +1,5 @@
 
-# Destination
+# Destination (this is the frontend of the application)
 
 Sifting through massive amounts of information online has always been a difficult process for travelers. Although recommendation sites have become the norm, word of mouth continues to prevail as the go to resource for every traveler.
 
@@ -26,9 +26,6 @@ More info on this can be found on the Ionic [Getting Started](http://ionicframew
 * [AngularJs](https://code.angularjs.org/1.6.5/docs/api) - The web framework used
 * [ionic](https://ionicframework.com/docs/v1/) - The framework that translates web to mobile
 
-## Contributing
-
-Open to all contribution just feel free to ping me or mark issues. Thanks!
 
 ## License
 
