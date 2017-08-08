@@ -3,7 +3,7 @@
 
 Sifting through massive amounts of information online has always been a difficult process for travelers. Although recommendation sites have become the norm, word of mouth continues to prevail as the go to resource for every traveler.
 
-This application, Destination, on top of providing an individual user a way to organize and document their own travels, acts as an extension of word of mouth. This allows users to access the cities that their facebook friends have traveled to and export all of the hotels, restaurants and destinations that their friends have marked.
+This application, Destination, in addition to providing an individual user a way to organize and document their own travels, acts as an extension of word of mouth. Destination allows users to access the cities that their facebook friends have traveled to and export all of the hotels, restaurants and destinations that their friends have marked, to their own profile.
 
 ## Getting Started
 
@@ -17,7 +17,7 @@ Fork and clone
 
 `~ npm install`
 
-To run the program on a local web server use ionic's built in local host command: `~ ionic serve`
+To run the program on a local web server, use ionic's built in local host command: `~ ionic serve`
 
 More info on this can be found on the Ionic [Getting Started](http://ionicframework.com/getting-started) page and the [Ionic CLI](https://github.com/driftyco/ionic-cli) repo.
 
