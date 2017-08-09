@@ -7,7 +7,7 @@ In addition to providing an individual user a way to organize and document their
 
 ## Demo
 
-[Destination walkthrough](https://www.youtube.com/watch?v=ue5LFooJ7LY&t=27s)
+[Destination walkthrough](https://youtu.be/ue5LFooJ7LY)
 
 ## Getting Started
 
