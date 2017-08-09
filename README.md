@@ -5,6 +5,10 @@ Sifting through massive amounts of information online has always been a difficul
 
 This application, Destination, on top of providing an individual user a way to organize and document their own travels, acts as an extension of word of mouth. This allows users to access the cities that their facebook friends have traveled to and export all of the hotels, restaurants and destinations that their friends have marked.
 
+## Demo
+
+[Destination walkthrough](https://www.youtube.com/watch?v=ue5LFooJ7LY&t=27s)
+
 ## Getting Started
 
 These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. See deployment for notes on how to deploy the project on a live system.
