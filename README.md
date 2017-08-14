@@ -1,5 +1,7 @@
 
-# Destination (this is the frontend of the application)
+# Destination (frontend of the application)
+
+* [Node.js backend of the application](https://github.com/ith-harvey/destination-travel-backend)
 
 Sifting through massive amounts of information online has always been a difficult process for travelers. Although recommendation sites have become the norm, word of mouth continues to prevail as the go to resource for every traveler.
 
