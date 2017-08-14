@@ -30,7 +30,7 @@ More info on this can be found on the Ionic [Getting Started](http://ionicframew
 ## Built With
 
 * [AngularJs](https://code.angularjs.org/1.6.5/docs/api) - The web framework used
-* [ionic](https://ionicframework.com/docs/v1/) - The framework that translates web to mobile
+* [ionic](https://ionicframework.com/docs/v1/) - The framework that translates AngularJS to IOS and Andriod
 
 
 ## License
