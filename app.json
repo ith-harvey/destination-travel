@@ -1,0 +1,7 @@
+{
+    "name": "Destination",
+    "description": "A simple Ionic app for Heroku",
+    "repository": "https://github.com/ith-harvey/destination-travel.git",
+    "logo": "http://pathToYourLogo.png",
+    "keywords": ["ionic", "devdactic", "whatever"]
+}
