@@ -7,6 +7,7 @@ angular.module('starter')
   $scope.searchBarClass = 'search-hide'
   $scope.footerbarclass = "footer-bar-hide"
   $scope.watchingDetails = mapDetailsService.details
+
   $scope.watchingDetails.show = false
 
 
@@ -92,6 +93,7 @@ angular.module('starter')
 
 
   $scope.$watch('watchingDetails', function(newVal, oldVal) {
+    console.log('firing watch!',newVal);
       if (newVal.show) {
         console.log('what triggers the if!',newVal);
         $scope.searchMap(newVal.tripDetails.formatted_address)

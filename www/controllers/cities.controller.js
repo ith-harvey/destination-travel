@@ -60,7 +60,6 @@ angular.module('starter').controller('CitiesCtrl', function($scope, $state, citi
 
   $scope.$watch('watchingDetails', function(newVal, oldVal) {
       if (newVal.show) {
-        console.log('what triggers the if!',newVal);
         $scope.searchMap(newVal.tripDetails.formatted_address)
         console.log('search is getting run!');
       }
