@@ -2,6 +2,9 @@
   "name": "travel-share",
   "version": "0.0.1",
   "description": "An Ionic project",
+  "scripts": {
+    "start": "node ./bin/www"
+  },
   "dependencies": {
     "cordova-ios": "^4.4.0",
     "cordova-plugin-compat": "^1.1.0",
