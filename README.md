@@ -1,5 +1,7 @@
 
-# Destination (this is the frontend of the application)
+# Destination (frontend of the application)
+
+[Node.js backend of the application](https://github.com/ith-harvey/destination-travel-backend)
 
 Sifting through massive amounts of information online has always been a difficult process for travelers. Although recommendation sites have become the norm, word of mouth continues to prevail as the go to resource for every traveler.
 
@@ -28,7 +30,7 @@ More info on this can be found on the Ionic [Getting Started](http://ionicframew
 ## Built With
 
 * [AngularJs](https://code.angularjs.org/1.6.5/docs/api) - The web framework used
-* [ionic](https://ionicframework.com/docs/v1/) - The framework that translates web to mobile
+* [ionic](https://ionicframework.com/docs/v1/) - The framework that translates AngularJS to IOS and Andriod
 
 
 ## License
