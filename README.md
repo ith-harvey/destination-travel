@@ -1,5 +1,5 @@
 
-![screenshot](destination-travel/screenshot.PNG)
+![screenshot](https://github.com/ith-harvey/destination-travel/master/screenshot.PNG)
 
 # Destination (frontend of the application)
 
