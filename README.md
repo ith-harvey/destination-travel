@@ -7,10 +7,11 @@ Sifting through massive amounts of information online has always been a difficul
 
 In addition to providing an individual user a way to organize and document their own travels, destination acts as an extension of word of mouth. This application allows users to access the cities that their facebook friends have traveled to and export all of the hotels, restaurants and destinations that their friends have marked, to their own profile.
 
-[See destination-travel live, deployed on Heroku](https://destination-travel.herokuapp.com/#/app/home)
+
 
 ## Demo
 
+[See destination-travel (web version) live, deployed on Heroku](https://destination-travel.herokuapp.com/#/app/home)
 [Destination walkthrough](https://youtu.be/ue5LFooJ7LY)
 
 ## Getting Started
