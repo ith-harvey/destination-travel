@@ -1,4 +1,6 @@
 
+![screenshot](https://github.com/ith-harvey/destination-travel/.png)
+
 # Destination (frontend of the application)
 
 [Node.js backend of the application](https://github.com/ith-harvey/destination-travel-backend)
