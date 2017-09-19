@@ -12,8 +12,6 @@ In addition to providing an individual user a way to organize and document their
 
 ## Demo
 
-[See destination-travel (web version) live, deployed on Heroku](https://destination-travel.herokuapp.com/#/app/home)
-
 [Destination walkthrough](https://youtu.be/ue5LFooJ7LY)
 
 ## Getting Started
